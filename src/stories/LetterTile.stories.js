@@ -3,6 +3,9 @@ import LetterTile from '../components/LetterTile.vue'
 export default {
   title: 'LetterTile',
   component: LetterTile,
+  parameters: {
+    layout: 'centered'
+  },
   argTypes: {
     letter: {
       control: {
@@ -12,7 +15,11 @@ export default {
   }
 }
 
-export const Primary = {
+export const EmptyNotLocked = {
+  args: {}
+}
+
+export const LetterNotLocked = {
   args: {
     letter: 'A'
   }
