@@ -4,7 +4,11 @@ const config = {
   addons: [
     '@storybook/addon-links',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions'
+    '@storybook/addon-interactions',
+    {
+      name: '@storybook/addon-styling',
+      options: {}
+    }
   ],
   framework: {
     name: '@storybook/vue3-vite',
