@@ -15,12 +15,33 @@ export default {
   }
 }
 
-export const EmptyNotLocked = {
+export const EmptyNotLockedIn = {
   args: {}
 }
 
-export const LetterNotLocked = {
+export const LetterNotLockedIn = {
   args: {
     letter: 'A'
+  }
+}
+
+export const CorrectGuess = {
+  args: {
+    letter: 'G',
+    guess: 'correct'
+  }
+}
+
+export const GuessWrongPosition = {
+  args: {
+    letter: 'U',
+    guess: 'wrongPosition'
+  }
+}
+
+export const WrongGuess = {
+  args: {
+    letter: 'X',
+    guess: 'notInWord'
   }
 }
