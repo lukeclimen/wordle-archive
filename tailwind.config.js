@@ -8,6 +8,9 @@ module.exports = {
       },
       height: {
         15: '58px'
+      },
+      maxWidth: {
+        11: '44px'
       }
     }
   },
