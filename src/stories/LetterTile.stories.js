@@ -7,10 +7,16 @@ export default {
     layout: 'centered'
   },
   argTypes: {
-    letter: {
+    hasLetter: {
       control: {
         type: 'text'
       }
+    },
+    guess: {
+      control: {
+        type: 'select'
+      },
+      options: ['correct', 'wrongPosition', 'notInWord']
     }
   }
 }
@@ -21,27 +27,27 @@ export const EmptyNotLockedIn = {
 
 export const LetterNotLockedIn = {
   args: {
-    letter: 'A'
+    hasLetter: true
   }
 }
 
 export const CorrectGuess = {
   args: {
-    letter: 'G',
+    hasLetter: true,
     guess: 'correct'
   }
 }
 
 export const GuessWrongPosition = {
   args: {
-    letter: 'U',
+    hasLetter: true,
     guess: 'wrongPosition'
   }
 }
 
 export const WrongGuess = {
   args: {
-    letter: 'X',
+    hasLetter: true,
     guess: 'notInWord'
   }
 }
