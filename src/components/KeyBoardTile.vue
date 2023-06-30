@@ -40,9 +40,9 @@ const props = defineProps({
   letterState: {
     type: String,
     required: false,
-    default: 'notLocked',
+    default: 'default',
     validator(value) {
-      return ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord'].includes(value)
+      return ['default', 'correct', 'wrongPosition', 'notInWord'].includes(value)
     }
   }
 })

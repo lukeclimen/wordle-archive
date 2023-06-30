@@ -5,7 +5,15 @@ import BaseLetter from '../components/BaseLetter.vue'
 export default {
   title: 'KeyBoardTile',
   component: KeyBoardTile,
-  argTypes: {}
+  argTypes: {
+    content: {
+      control: 'text'
+    },
+    letterState: {
+      control: 'radio',
+      options: ['default', 'correct', 'wrongPosition', 'notInWord']
+    }
+  }
 }
 
 const Template = {
@@ -17,18 +25,57 @@ const Template = {
     template: `
     <KeyBoardTile v-bind="args">
       <LetterBackground v-bind="args">
-        <BaseLetter class="text-4xl" v-bind="args"/>
+        <BaseLetter v-bind="args"/>
       </LetterBackground>
     </KeyBoardTile>
     `
   })
 }
 
-export const Primary = {
+export const Blank = {
   ...Template,
   args: {
     letterState: 'default',
-    colour: 'black',
-    letter: 'b'
+    content: ''
+  }
+}
+
+export const BackButton = {
+  ...Template,
+  args: {
+    letterState: 'default',
+    content: 'back'
+  }
+}
+
+export const EnterButton = {
+  ...Template,
+  args: {
+    letterState: 'default',
+    content: 'enter'
+  }
+}
+
+export const CorrectGuess = {
+  ...Template,
+  args: {
+    letterState: 'correct',
+    content: 'a'
+  }
+}
+
+export const WrongPosition = {
+  ...Template,
+  args: {
+    letterState: 'wrongPosition',
+    content: 's'
+  }
+}
+
+export const NotInWord = {
+  ...Template,
+  args: {
+    letterState: 'notInWord',
+    content: 'd'
   }
 }
