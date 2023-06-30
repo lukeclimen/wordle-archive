@@ -9,7 +9,7 @@ export default {
       control: {
         type: 'select'
       },
-      options: ['notLocked', 'correct', 'wrongPosition', 'notInWord']
+      options: ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord']
     }
   }
 }
