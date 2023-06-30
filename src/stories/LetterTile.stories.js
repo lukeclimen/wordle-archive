@@ -32,7 +32,7 @@ const Template = {
     template: `
     <LetterTile v-bind="args">
       <LetterBackground v-bind="args">
-        <BaseLetter class="text-4xl" colour="white" letter="w" />
+        <BaseLetter class="text-4xl" v-bind="args"/>
       </LetterBackground>
     </LetterTile>
     `
@@ -50,7 +50,9 @@ export const LetterNotLockedIn = {
   ...Template,
   args: {
     hasLetter: true,
-    letterState: 'notLocked'
+    letterState: 'notLocked',
+    colour: 'black',
+    letter: 'b'
   }
 }
 
@@ -59,7 +61,9 @@ export const CorrectGuess = {
   args: {
     hasLetter: true,
     guess: 'correct',
-    letterState: 'correct'
+    letterState: 'correct',
+    colour: 'white',
+    letter: 'c'
   }
 }
 
@@ -68,7 +72,9 @@ export const GuessWrongPosition = {
   args: {
     hasLetter: true,
     guess: 'wrongPosition',
-    letterState: 'wrongPosition'
+    letterState: 'wrongPosition',
+    colour: 'white',
+    letter: 'w'
   }
 }
 
@@ -77,6 +83,8 @@ export const WrongGuess = {
   args: {
     hasLetter: true,
     guess: 'notInWord',
-    letterState: 'notInWord'
+    letterState: 'notInWord',
+    colour: 'white',
+    letter: 'n'
   }
 }
