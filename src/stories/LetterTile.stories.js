@@ -1,4 +1,6 @@
 import LetterTile from '../components/LetterTile.vue'
+import LetterBackground from '../components/LetterBackground.vue'
+import BaseLetter from '../components/BaseLetter.vue'
 
 export default {
   title: 'LetterTile',
@@ -7,41 +9,82 @@ export default {
     layout: 'centered'
   },
   argTypes: {
-    letter: {
+    hasLetter: {
       control: {
         type: 'text'
       }
+    },
+    guess: {
+      control: {
+        type: 'select'
+      },
+      options: ['correct', 'wrongPosition', 'notInWord']
     }
   }
 }
 
+const Template = {
+  render: (args) => ({
+    components: { LetterTile, LetterBackground, BaseLetter },
+    setup() {
+      return { args }
+    },
+    template: `
+    <LetterTile v-bind="args">
+      <LetterBackground v-bind="args">
+        <BaseLetter class="text-4xl" v-bind="args"/>
+      </LetterBackground>
+    </LetterTile>
+    `
+  })
+}
+
 export const EmptyNotLockedIn = {
-  args: {}
+  ...Template,
+  args: {
+    letterState: 'notLocked'
+  }
 }
 
 export const LetterNotLockedIn = {
+  ...Template,
   args: {
-    letter: 'A'
+    hasLetter: true,
+    letterState: 'notLocked',
+    colour: 'black',
+    letter: 'b'
   }
 }
 
 export const CorrectGuess = {
+  ...Template,
   args: {
-    letter: 'G',
-    guess: 'correct'
+    hasLetter: true,
+    guess: 'correct',
+    letterState: 'correct',
+    colour: 'white',
+    letter: 'c'
   }
 }
 
 export const GuessWrongPosition = {
+  ...Template,
   args: {
-    letter: 'U',
-    guess: 'wrongPosition'
+    hasLetter: true,
+    guess: 'wrongPosition',
+    letterState: 'wrongPosition',
+    colour: 'white',
+    letter: 'w'
   }
 }
 
 export const WrongGuess = {
+  ...Template,
   args: {
-    letter: 'X',
-    guess: 'notInWord'
+    hasLetter: true,
+    guess: 'notInWord',
+    letterState: 'notInWord',
+    colour: 'white',
+    letter: 'n'
   }
 }
