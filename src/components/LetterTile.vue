@@ -33,6 +33,14 @@ defineProps({
   border-color: black;
 }
 
+.correct-position,
+.wrong-position,
+.absent {
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  transform: scaleX(180deg);
+}
+
 .correct-position {
   border-color: #538d4e;
 }
