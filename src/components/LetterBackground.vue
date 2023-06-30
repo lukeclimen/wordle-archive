@@ -5,7 +5,8 @@
       { 'not-locked': letterState === 'notLocked' },
       { correct: letterState === 'correct' },
       { 'wrong-position': letterState === 'wrongPosition' },
-      { 'not-in-word': letterState === 'notInWord' }
+      { 'not-in-word': letterState === 'notInWord' },
+      { default: letterState === 'default' }
     ]"
   >
     <slot></slot>
@@ -19,13 +20,14 @@ defineProps({
     required: false,
     default: 'notLocked',
     validator(value) {
-      return ['notLocked', 'correct', 'wrongPosition', 'notInWord'].includes(value)
+      return ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord'].includes(value)
     }
   }
 })
 </script>
 
 <style scoped>
+.default,
 .not-locked,
 .correct,
 .wrong-position,
@@ -47,5 +49,9 @@ defineProps({
 
 .not-in-word {
   background-color: #787c7e;
+}
+
+.default {
+  background-color: #d3d6da;
 }
 </style>
