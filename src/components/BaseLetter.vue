@@ -1,5 +1,5 @@
 <template>
-  <p class="uppercase font-bold" :class="[colour === 'white' ? 'text-white' : 'text-black']">
+  <p class="uppercase font-bold w-5" :class="[colour === 'white' ? 'text-white' : 'text-black']">
     {{ letter.charAt(0) }}
   </p>
 </template>
