@@ -15,7 +15,7 @@
 
       <template v-else>
         <BaseLetter
-          class="text-3xl"
+          class="text-xl"
           :colour="hasBeenGuessed ? 'white' : 'black'"
           :letter="content"
         />
