@@ -1,4 +1,4 @@
-import BaseLetter from '../components/BaseLetter.vue'
+import BaseLetter from '../components/BaseLetter.vue';
 
 export default {
   title: 'BaseLetter',
@@ -25,18 +25,18 @@ export default {
       ]
     }
   }
-}
+};
 
 export const WhiteLetter = {
   args: {
     letter: 'w',
     colour: 'white'
   }
-}
+};
 
 export const BlackLetter = {
   args: {
     letter: 'b',
     colour: 'black'
   }
-}
+};

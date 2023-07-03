@@ -20,10 +20,12 @@ defineProps({
     required: false,
     default: 'notLocked',
     validator(value) {
-      return ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord'].includes(value)
+      return ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord'].includes(
+        value
+      );
     }
   }
-})
+});
 </script>
 
 <style scoped>

@@ -34,8 +34,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-import KeyBoardTile from './KeyBoardTile.vue'
+import { ref } from 'vue';
+import KeyBoardTile from './KeyBoardTile.vue';
 
 const props = defineProps({
   correctLetters: {
@@ -53,25 +53,25 @@ const props = defineProps({
     required: false,
     default: () => []
   }
-})
+});
 
-const topRowKeys = ref(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'])
-const middleRowKeys = ref(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'])
-const bottomRowKeys = ref(['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'back'])
+const topRowKeys = ref(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']);
+const middleRowKeys = ref(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']);
+const bottomRowKeys = ref(['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'back']);
 
-const handleKeyClick = (content) => console.log(content)
+const handleKeyClick = (content) => console.log(content);
 
 const lookupState = (letter) => {
   if (props.correctLetters.includes(letter)) {
-    return 'correct'
+    return 'correct';
   } else if (props.wrongPositionLetters.includes(letter)) {
-    return 'wrongPosition'
+    return 'wrongPosition';
   } else if (props.wrongGuessLetters.includes(letter)) {
-    return 'notInWord'
+    return 'notInWord';
   } else {
-    return 'default'
+    return 'default';
   }
-}
+};
 </script>
 
 <style lang="scss" scoped></style>

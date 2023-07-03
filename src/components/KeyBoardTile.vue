@@ -25,12 +25,12 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed } from 'vue';
 
-import LetterBackground from './LetterBackground.vue'
-import BaseLetter from './BaseLetter.vue'
+import LetterBackground from './LetterBackground.vue';
+import BaseLetter from './BaseLetter.vue';
 
-import { BackspaceIcon } from '@heroicons/vue/24/outline'
+import { BackspaceIcon } from '@heroicons/vue/24/outline';
 
 const props = defineProps({
   content: {
@@ -42,14 +42,14 @@ const props = defineProps({
     required: false,
     default: 'default',
     validator(value) {
-      return ['default', 'correct', 'wrongPosition', 'notInWord'].includes(value)
+      return ['default', 'correct', 'wrongPosition', 'notInWord'].includes(value);
     }
   }
-})
+});
 
 const hasBeenGuessed = computed(() => {
-  return props.letterState !== 'default'
-})
+  return props.letterState !== 'default';
+});
 </script>
 
 <style scoped></style>

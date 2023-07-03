@@ -22,10 +22,10 @@ defineProps({
     type: String,
     required: false,
     validator(value) {
-      return ['correct', 'wrongPosition', 'notInWord'].includes(value)
+      return ['correct', 'wrongPosition', 'notInWord'].includes(value);
     }
   }
-})
+});
 </script>
 
 <style scoped>

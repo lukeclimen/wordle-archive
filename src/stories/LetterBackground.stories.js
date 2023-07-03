@@ -1,5 +1,5 @@
-import LetterBackground from '../components/LetterBackground.vue'
-import BaseLetter from '../components/BaseLetter.vue'
+import LetterBackground from '../components/LetterBackground.vue';
+import BaseLetter from '../components/BaseLetter.vue';
 
 export default {
   title: 'LetterBackground',
@@ -12,13 +12,13 @@ export default {
       options: ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord']
     }
   }
-}
+};
 
 const LockedInTemplate = {
   render: (args) => ({
     components: { LetterBackground, BaseLetter },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
     <div class="w-15 h-15">
@@ -28,13 +28,13 @@ const LockedInTemplate = {
     </div>
     `
   })
-}
+};
 
 const NotLockedTemplate = {
   render: (args) => ({
     components: { LetterBackground, BaseLetter },
     setup() {
-      return { args }
+      return { args };
     },
     template: `
     <div class="w-15 h-15">
@@ -44,32 +44,32 @@ const NotLockedTemplate = {
     </div>
     `
   })
-}
+};
 
 export const NotLocked = {
   ...NotLockedTemplate,
   args: {
     letterState: 'notLocked'
   }
-}
+};
 
 export const Correct = {
   ...LockedInTemplate,
   args: {
     letterState: 'correct'
   }
-}
+};
 
 export const WrongPosition = {
   ...LockedInTemplate,
   args: {
     letterState: 'wrongPosition'
   }
-}
+};
 
 export const NotInWord = {
   ...LockedInTemplate,
   args: {
     letterState: 'notInWord'
   }
-}
+};

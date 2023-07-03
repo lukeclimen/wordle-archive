@@ -1,4 +1,4 @@
-import KeyBoard from '../components/KeyBoard.vue'
+import KeyBoard from '../components/KeyBoard.vue';
 
 export default {
   title: 'KeyBoard',
@@ -17,11 +17,11 @@ export default {
       control: 'disabled'
     }
   }
-}
+};
 
 export const Default = {
   args: {}
-}
+};
 
 export const SomeGuesses = {
   args: {
@@ -29,7 +29,7 @@ export const SomeGuesses = {
     wrongPositionLetters: ['t'],
     wrongGuessLetters: ['q', 'g', 'm']
   }
-}
+};
 
 export const MostGuessed = {
   args: {
@@ -37,4 +37,4 @@ export const MostGuessed = {
     wrongPositionLetters: ['t', 'r'],
     wrongGuessLetters: ['q', 'g', 'm', 'o', 'l', 'c', 'v', 'p']
   }
-}
+};
