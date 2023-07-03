@@ -1,4 +1,5 @@
 import { withThemeByClassName } from '@storybook/addon-styling'
+import { INITIAL_VIEWPORTS } from '@storybook/addon-viewport'
 
 /* TODO: update import to your tailwind styles file */
 import '../src/assets/main.css'
@@ -11,6 +12,10 @@ const preview = {
         color: /(background|color)$/i,
         date: /Date$/
       }
+    },
+    viewport: {
+      viewports: INITIAL_VIEWPORTS,
+      defaultViewport: 'iphonex'
     }
   },
 
