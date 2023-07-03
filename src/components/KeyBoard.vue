@@ -1,11 +1,11 @@
 <template>
-  <div class="flex flex-col w-screen gap-y-2 p-2">
+  <div class="flex flex-col w-screen gap-y-2 p-2 max-w-lg">
     <ul id="top-row" class="flex flex-row w-full gap-x-1.5 justify-center">
       <li v-for="(letter, index) in topRowKeys" :key="index" class="flex-grow">
         <KeyBoardTile :content="letter" @keyClicked="handleKeyClick" class="w-full" />
       </li>
     </ul>
-    <ul id="middle-row" class="flex flex-row gap-x-1.5 justify-center">
+    <ul id="middle-row" class="flex flex-row gap-x-1.5 justify-center px-4">
       <li v-for="(letter, index) in middleRowKeys" :key="index" class="flex-grow">
         <KeyBoardTile :content="letter" @keyClicked="handleKeyClick" class="w-full" />
       </li>
