@@ -23,7 +23,7 @@ const LockedInTemplate = {
     template: `
     <div class="w-15 h-15">
       <LetterBackground v-bind="args">
-        <BaseLetter class="text-4xl" colour="white" letter="w" />
+        <BaseLetter class="flex text-xl justify-center" colour="white" letter="w" />
       </LetterBackground>
     </div>
     `
@@ -39,7 +39,7 @@ const NotLockedTemplate = {
     template: `
     <div class="w-15 h-15">
       <LetterBackground v-bind="args">
-        <BaseLetter class="text-4xl" colour="black" letter="b" />
+        <BaseLetter class="flex text-xl justify-center" colour="black" letter="b" />
       </LetterBackground>
     </div>
     `

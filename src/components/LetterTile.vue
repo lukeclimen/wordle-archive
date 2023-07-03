@@ -2,23 +2,33 @@
   <div
     class="flex justify-center items-center w-15 h-15 border-2 border-gray-500 uppercase"
     v-bind:class="[
-      { 'not-empty': hasLetter },
-      { 'correct-position': guess === 'correct' },
-      { 'wrong-position': guess === 'wrongPosition' },
-      { absent: guess === 'notInWord' }
+      { 'not-empty': content },
+      { 'correct-position': letterState === 'correct' },
+      { 'wrong-position': letterState === 'wrongPosition' },
+      { absent: letterState === 'notInWord' }
     ]"
   >
-    <slot></slot>
+    <LetterBackground :letter-state="letterState">
+      <BaseLetter
+        v-if="content"
+        class="flex text-4xl justify-center"
+        :colour="letterState ? 'white' : 'black'"
+        :letter="content"
+      />
+    </LetterBackground>
   </div>
 </template>
 
 <script setup>
+import LetterBackground from './LetterBackground.vue';
+import BaseLetter from './BaseLetter.vue';
+
 defineProps({
-  hasLetter: {
-    type: Boolean,
-    default: false
+  content: {
+    type: String,
+    required: false
   },
-  guess: {
+  letterState: {
     type: String,
     required: false,
     validator(value) {

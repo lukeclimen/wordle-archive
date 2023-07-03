@@ -1,6 +1,7 @@
 <template>
   <p
     class="uppercase font-bold w-5"
+    v-if="letter"
     :class="[colour === 'white' ? 'text-white' : 'text-black']"
   >
     {{ letter.charAt(0) }}
@@ -11,7 +12,8 @@
 defineProps({
   colour: {
     type: String,
-    required: true,
+    required: false,
+    default: 'white',
     validator(value) {
       return ['white', 'black'].includes(value);
     }
