@@ -1,8 +1,8 @@
 <template>
-  <div
+  <button
     @click="$emit('keyClicked', content)"
-    class="h-15 rounded-md overflow-hidden opacity-100 active:brightness-75 transition-opacity"
-    :class="content === 'back' || content === 'enter' ? 'max-w-16' : 'max-w-11'"
+    class="h-15 rounded-md overflow-hidden opacity-100 active:brightness-75 transition-opacity margin-auto"
+    :class="content === 'back' || content === 'enter' ? 'max-w-17' : 'max-w-12'"
   >
     <LetterBackground :letter-state="letterState">
       <template v-if="content === 'enter'">
@@ -15,13 +15,13 @@
 
       <template v-else>
         <BaseLetter
-          class="text-3xl"
+          class="text-xl"
           :colour="hasBeenGuessed ? 'white' : 'black'"
           :letter="content"
         />
       </template>
     </LetterBackground>
-  </div>
+  </button>
 </template>
 
 <script setup>
