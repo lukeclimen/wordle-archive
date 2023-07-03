@@ -11,7 +11,7 @@
     <LetterBackground :letter-state="letterState">
       <BaseLetter
         v-if="content"
-        class="text-xl"
+        class="flex text-4xl justify-center"
         :colour="letterState ? 'white' : 'black'"
         :letter="content"
       />
