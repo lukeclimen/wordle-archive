@@ -1,6 +1,10 @@
 <template>
   <span class="flex flex-row gap-x-2"
-    ><LetterTile v-for="(letter, index) in lettersInGuess" :key="index" :content="letter"
+    ><LetterTile
+      v-for="(letter, index) in lettersInGuess"
+      :key="index"
+      :content="letter"
+      :letter-state="setLetterState(index)"
   /></span>
 </template>
 
@@ -13,6 +17,21 @@ const props = defineProps({
     type: String,
     required: false,
     default: ''
+  },
+  locked: {
+    type: Boolean,
+    required: false,
+    default: false
+  },
+  correctLetters: {
+    type: Array,
+    required: false,
+    default: () => []
+  },
+  wrongPositionLetters: {
+    type: Array,
+    required: false,
+    default: () => []
   }
 });
 
@@ -30,6 +49,18 @@ const lettersInGuess = computed(() => {
   }
   return letterArray;
 });
+
+const setLetterState = (index) => {
+  if (props.locked) {
+    if (props.correctLetters.includes(index)) {
+      return 'correct';
+    } else if (props.wrongPositionLetters.includes(index)) {
+      return 'wrongPosition';
+    } else {
+      return 'notInWord';
+    }
+  } else return;
+};
 </script>
 
 <style lang="scss" scoped></style>
