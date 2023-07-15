@@ -10,7 +10,7 @@
   >
     <LetterBackground :letter-state="letterState">
       <BaseLetter
-        v-if="content"
+        v-if="content || content !== ''"
         class="flex text-4xl justify-center"
         :colour="letterState ? 'white' : 'black'"
         :letter="content"
