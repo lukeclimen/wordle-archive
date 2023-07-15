@@ -8,8 +8,12 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed } from 'vue';
+import { useGameStore } from './stores/GameStore';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
-const gridRows = ref([0, 1, 2, 3, 4, 5]);
+
+const gameStore = useGameStore();
+
+const gridRows = computed(() => gameStore.getGuessList);
 </script>
