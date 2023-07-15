@@ -7,8 +7,9 @@ export const useGameStore = defineStore('Game Store', {
       isLoading: false,
       isErrored: false,
       errorMessage: null,
-      guessList: [],
-      amountOfGuesses: 0
+      guessList: ['', '', '', '', '', ''],
+      amountOfGuesses: 0,
+      currentGuessWord: ''
     };
   },
   getters: {
@@ -32,6 +33,9 @@ export const useGameStore = defineStore('Game Store', {
     },
     getLostGame(state) {
       return state.amountOfGuesses >= 6;
+    },
+    getCurrentGuessWord(state) {
+      return state.currentGuessWord;
     }
   },
   actions: {
@@ -54,7 +58,7 @@ export const useGameStore = defineStore('Game Store', {
       this.errorMessage = null;
     },
     addGuessWord(guessWord) {
-      this.guessList.push(guessWord);
+      this.guessList[this.amountOfGuesses] = guessWord;
       this.amountOfGuesses++;
     },
     checkGuess(guessWord) {
@@ -63,6 +67,17 @@ export const useGameStore = defineStore('Game Store', {
       } else {
         this.addGuessWord(guessWord);
         return false;
+      }
+    },
+    addLetterToGuess(letter) {
+      if (this.currentGuessWord.length < 5) {
+        this.currentGuessWord = this.currentGuessWord.concat(letter);
+      }
+    },
+    removeLetterFromGuess() {
+      if (this.currentGuessWord > 0) {
+        const numberOfLetters = this.currentGuessWord.length;
+        this.currentGuessWord = this.currentGuessWord.slice(0, numberOfLetters - 1);
       }
     }
   }
