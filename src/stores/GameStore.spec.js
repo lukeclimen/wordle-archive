@@ -46,4 +46,34 @@ describe('Game Store', () => {
     testStore.currentGuessWord = 'click';
     expect(testStore.checkGuess()).toBe(true);
   });
+
+  it('Adds guesses into the list and tracks game-loss state', () => {
+    const testStore = useGameStore();
+    testStore.wordOfTheDay = 'click';
+
+    const guessList = ['track', 'while', 'audio', 'crane', 'sound', 'teary'];
+    const guessTrackList = ['', '', '', '', '', ''];
+
+    // Initial state
+    expect(testStore.getGuessList).toStrictEqual(guessTrackList);
+
+    // Add guesses
+    guessList.forEach((guess, index) => {
+      // Check if the player has lost the game
+      expect(testStore.getLostGame).toBe(false);
+
+      // Add guess to state and check it against 'click'
+      testStore.addLetterToGuess(guess);
+      testStore.checkGuess();
+
+      // Reflect proper behaviour with guessTrackList
+      guessTrackList[index] = guess;
+
+      // Compare guessList in state to proper behaviour
+      expect(testStore.getGuessList).toStrictEqual(guessTrackList);
+    });
+
+    // After 6 guesses, the player should have lost the game
+    expect(testStore.getLostGame).toBe(true);
+  });
 });

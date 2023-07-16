@@ -71,7 +71,7 @@ export const useGameStore = defineStore('Game Store', {
         return true;
       } else {
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
-        this.guessWord = '';
+        this.currentGuessWord = '';
         return false;
       }
     },
