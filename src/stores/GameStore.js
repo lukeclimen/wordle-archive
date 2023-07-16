@@ -62,11 +62,16 @@ export const useGameStore = defineStore('Game Store', {
       this.guessList[this.amountOfGuesses] = guessWord;
       this.amountOfGuesses++;
     },
-    checkGuess(guessWord) {
-      if (this.wordOfTheDay === guessWord.toLocaleLowerCase()) {
+    checkGuess() {
+      // TODO: Add legal word check
+      if (
+        this.currentGuessWord.length === 5 &&
+        this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()
+      ) {
         return true;
       } else {
-        this.addGuessWord(guessWord.toLocaleLowerCase());
+        this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
+        this.guessWord = '';
         return false;
       }
     },

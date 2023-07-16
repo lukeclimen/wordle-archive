@@ -34,4 +34,16 @@ describe('Game Store', () => {
     }
     expect(testStore.getCurrentGuessWord).toBe('');
   });
+  it('Compares the guess word against the answer', () => {
+    const testStore = useGameStore();
+
+    // Test incorrect guess
+    testStore.wordOfTheDay = 'click';
+    testStore.currentGuessWord = 'track';
+    expect(testStore.checkGuess()).toBe(false);
+
+    // Test correct guess
+    testStore.currentGuessWord = 'click';
+    expect(testStore.checkGuess()).toBe(true);
+  });
 });
