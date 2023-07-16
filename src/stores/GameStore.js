@@ -75,9 +75,10 @@ export const useGameStore = defineStore('Game Store', {
       }
     },
     removeLetterFromGuess() {
-      if (this.currentGuessWord > 0) {
+      if (this.currentGuessWord.length > 0) {
         const numberOfLetters = this.currentGuessWord.length;
-        this.currentGuessWord = this.currentGuessWord.slice(0, numberOfLetters - 1);
+        this.currentGuessWord = '';
+        this.currentGuessWord.substring(0, numberOfLetters - 1);
       }
     }
   }
