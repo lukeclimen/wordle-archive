@@ -42,6 +42,7 @@ export const useGameStore = defineStore('Game Store', {
     fetchWordOfTheDay() {
       // TODO: Add fetch request once an endpoint is created
       // Currently only mocking the request and using "CLICK"
+      this.wordOfTheDay = 'click'.toLocaleLowerCase();
     },
     setLoading() {
       this.isLoading = true;
@@ -62,16 +63,16 @@ export const useGameStore = defineStore('Game Store', {
       this.amountOfGuesses++;
     },
     checkGuess(guessWord) {
-      if (this.wordOfTheDay === guessWord) {
+      if (this.wordOfTheDay === guessWord.toLocaleLowerCase()) {
         return true;
       } else {
-        this.addGuessWord(guessWord);
+        this.addGuessWord(guessWord.toLocaleLowerCase());
         return false;
       }
     },
     addLetterToGuess(letter) {
       if (this.currentGuessWord.length < 5) {
-        this.currentGuessWord = this.currentGuessWord.concat(letter);
+        this.currentGuessWord = this.currentGuessWord.concat(letter.toLocaleLowerCase());
       }
     },
     removeLetterFromGuess() {
