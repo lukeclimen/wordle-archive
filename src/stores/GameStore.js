@@ -65,10 +65,12 @@ export const useGameStore = defineStore('Game Store', {
     checkGuess() {
       // TODO: Add legal word check
       if (
-        this.currentGuessWord.length === 5 &&
+        this.checkForFullWord() &&
         this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()
       ) {
         return true;
+      } else if (!this.checkForFullWord()) {
+        return false;
       } else {
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
         this.currentGuessWord = '';
@@ -85,6 +87,13 @@ export const useGameStore = defineStore('Game Store', {
         const numberOfLetters = this.currentGuessWord.length;
         this.currentGuessWord = '';
         this.currentGuessWord.substring(0, numberOfLetters - 1);
+      }
+    },
+    checkForFullWord() {
+      if (this.currentGuessWord.length === 5) {
+        return true;
+      } else {
+        return false;
       }
     }
   }
