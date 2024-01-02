@@ -18,7 +18,7 @@ const gameStore = useGameStore();
 const gridRows = computed(() => gameStore.getGuessList);
 
 const handleLetterPress = (content) => {
-  if (content === 'enter' && gameStore.checkForFullWord()) {
+  if (content === 'enter') {
     gameStore.checkGuess();
   } else if (content === 'back') {
     gameStore.removeLetterFromGuess();

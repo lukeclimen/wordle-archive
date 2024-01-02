@@ -36,6 +36,9 @@ export const useGameStore = defineStore('Game Store', {
     },
     getCurrentGuessWord(state) {
       return state.currentGuessWord;
+    },
+    checkForFullWord(state) {
+      return state.currentGuessWord.length === 5;
     }
   },
   actions: {
@@ -65,11 +68,11 @@ export const useGameStore = defineStore('Game Store', {
     checkGuess() {
       // TODO: Add legal word check
       if (
-        this.checkForFullWord() &&
+        this.checkForFullWord &&
         this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()
       ) {
         return true;
-      } else if (!this.checkForFullWord()) {
+      } else if (!this.checkForFullWord) {
         return false;
       } else {
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
@@ -78,22 +81,14 @@ export const useGameStore = defineStore('Game Store', {
       }
     },
     addLetterToGuess(letter) {
-      if (this.currentGuessWord.length < 5) {
+      if (!this.checkForFullWord) {
         this.currentGuessWord = this.currentGuessWord.concat(letter.toLocaleLowerCase());
       }
     },
     removeLetterFromGuess() {
       if (this.currentGuessWord.length > 0) {
         const numberOfLetters = this.currentGuessWord.length;
-        this.currentGuessWord = '';
-        this.currentGuessWord.substring(0, numberOfLetters - 1);
-      }
-    },
-    checkForFullWord() {
-      if (this.currentGuessWord.length === 5) {
-        return true;
-      } else {
-        return false;
+        this.currentGuessWord = this.currentGuessWord.substring(0, numberOfLetters - 1);
       }
     }
   }
