@@ -36,7 +36,7 @@ const props = defineProps({
 });
 
 const lettersInGuess = computed(() => {
-  let letterArray = [];
+  let letterArray = props.guess;
   if (props.guess.length === 5) {
     letterArray = props.guess.split('');
   } else if (props.guess.length > 5) {

@@ -1,21 +1,28 @@
 <template>
   <div class="h-screen max-w-md mx-auto py-3 flex flex-col justify-center">
     <div class="flex flex-col gap-y-2 pb-3">
-      <GridRow v-for="(element, index) in gridRows" :key="index" />
+      <GridRow
+        v-for="(element, index) in gridRowContents"
+        :key="index"
+        :locked="index < activeRow ? true : false"
+        :guess="index === activeRow ? currentRowGuess : element"
+      />
     </div>
     <KeyBoard @letter-press="handleLetterPress" />
   </div>
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, onMounted } from 'vue';
 import { useGameStore } from './stores/GameStore';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 
 const gameStore = useGameStore();
 
-const gridRows = computed(() => gameStore.getGuessList);
+const gridRowContents = computed(() => gameStore.getGuessList);
+const activeRow = computed(() => gameStore.getGuessCount);
+const currentRowGuess = computed(() => gameStore.getCurrentGuessWord);
 
 const handleLetterPress = (content) => {
   if (content === 'enter') {
@@ -26,4 +33,8 @@ const handleLetterPress = (content) => {
     gameStore.addLetterToGuess(content);
   }
 };
+
+onMounted(() => {
+  gameStore.fetchWordOfTheDay();
+});
 </script>

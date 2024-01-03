@@ -39,9 +39,6 @@ export const useGameStore = defineStore('Game Store', {
     },
     checkForFullWord(state) {
       return state.currentGuessWord.length === 5;
-    },
-    getGuessWord(state) {
-      return state.currentGuessWord.split('');
     }
   },
   actions: {
