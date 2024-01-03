@@ -54,12 +54,13 @@ const props = defineProps({
     default: () => []
   }
 });
+const emit = defineEmits(['letterPress']);
 
 const topRowKeys = ref(['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p']);
 const middleRowKeys = ref(['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l']);
 const bottomRowKeys = ref(['enter', 'z', 'x', 'c', 'v', 'b', 'n', 'm', 'back']);
 
-const handleKeyClick = (content) => console.log(content);
+const handleKeyClick = (content) => emit('letterPress', content);
 
 const lookupState = (letter) => {
   if (props.correctLetters.includes(letter)) {
