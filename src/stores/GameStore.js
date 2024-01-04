@@ -57,7 +57,7 @@ export const useGameStore = defineStore('Game Store', {
     fetchWordOfTheDay() {
       // TODO: Add fetch request once an endpoint is created
       // Currently only mocking the request and using "CLICK"
-      this.wordOfTheDay = 'click'.toLocaleLowerCase();
+      this.wordOfTheDay = 'weary'.toLocaleLowerCase();
     },
     setLoading() {
       this.isLoading = true;
