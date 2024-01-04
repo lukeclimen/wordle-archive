@@ -4,13 +4,14 @@
       v-for="(letter, index) in lettersInGuess"
       :key="index"
       :content="letter"
-      :letter-state="setLetterState(index)"
+      :letter-state="locked ? letterStateArray[index] : null"
   /></span>
 </template>
 
 <script setup>
 import { computed } from 'vue';
 import LetterTile from './LetterTile.vue';
+import { useGameStore } from '../stores/GameStore';
 
 const props = defineProps({
   guess: {
@@ -22,18 +23,10 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
-  },
-  correctLetters: {
-    type: Array,
-    required: false,
-    default: () => []
-  },
-  wrongPositionLetters: {
-    type: Array,
-    required: false,
-    default: () => []
   }
 });
+
+const gameStore = useGameStore();
 
 const lettersInGuess = computed(() => {
   let letterArray = props.guess;
@@ -50,17 +43,22 @@ const lettersInGuess = computed(() => {
   return letterArray;
 });
 
-const setLetterState = (index) => {
-  if (props.locked) {
-    if (props.correctLetters.includes(index)) {
-      return 'correct';
-    } else if (props.wrongPositionLetters.includes(index)) {
-      return 'wrongPosition';
+const letterStateArray = computed(() => {
+  const letterStateArray = [];
+  const guessLetterArray = props.guess.split('');
+  guessLetterArray.forEach((letter, index) => {
+    if (gameStore.wordOfTheDay.includes(letter)) {
+      if (gameStore.wordOfTheDay[index] === letter) {
+        letterStateArray.push('correct');
+      } else {
+        letterStateArray.push('wrongPosition');
+      }
     } else {
-      return 'notInWord';
+      letterStateArray.push('notInWord');
     }
-  } else return;
-};
+  });
+  return letterStateArray;
+});
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped></style>

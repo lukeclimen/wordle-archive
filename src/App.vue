@@ -8,7 +8,12 @@
         :guess="index === activeRow ? currentRowGuess : element"
       />
     </div>
-    <KeyBoard @letter-press="handleLetterPress" />
+    <KeyBoard
+      @letter-press="handleLetterPress"
+      :correct-letters="getCorrectLetterArray"
+      :wrong-guess-letters="getwrongGuessLetterArray"
+      :wrong-position-letters="getwrongPositionLetterArray"
+    />
   </div>
 </template>
 
@@ -19,6 +24,8 @@ import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 
 const gameStore = useGameStore();
+const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterArray } =
+  useGameStore();
 
 const gridRowContents = computed(() => gameStore.getGuessList);
 const activeRow = computed(() => gameStore.getGuessCount);
