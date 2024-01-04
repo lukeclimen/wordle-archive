@@ -76,6 +76,7 @@ export const useGameStore = defineStore('Game Store', {
     addGuessWord(guessWord) {
       this.guessList[this.amountOfGuesses] = guessWord;
       this.amountOfGuesses++;
+      this.currentGuessWord = '';
     },
     checkGuess() {
       // TODO: Add legal word check
@@ -88,6 +89,7 @@ export const useGameStore = defineStore('Game Store', {
           this.addCorrectLetter(letter);
           this.removeWrongPositionLetter(letter);
         });
+        this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
         return true;
       } else if (!this.checkForFullWord) {
         return false;
