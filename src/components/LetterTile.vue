@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex justify-center items-center w-15 h-15 border-2 border-gray-500 uppercase"
+    class="flex justify-center items-center w-full aspect-square border-2 border-gray-500 uppercase"
     v-bind:class="[
       { 'not-empty': content },
       { 'correct-position': letterState === 'correct' },

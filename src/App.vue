@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen max-w-md mx-auto py-3 flex flex-col justify-center">
+  <div class="h-screen max-w-lg mx-auto py-3 flex flex-col justify-center">
     <div class="flex flex-col gap-y-2 pb-3">
       <GridRow
         v-for="(element, index) in gridRowContents"

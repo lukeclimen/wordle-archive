@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-screen gap-y-2 p-2 max-w-lg">
+  <div class="flex flex-col w-full gap-y-2 p-2">
     <ul id="top-row" class="flex flex-row w-full gap-x-1.5 justify-center">
       <li v-for="(letter, index) in topRowKeys" :key="index" class="flex-grow">
         <KeyBoardTile
