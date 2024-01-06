@@ -1,5 +1,5 @@
 <template>
-  <span class="flex flex-row gap-x-2 mx-auto justify-center"
+  <span class="flex flex-row w-full gap-x-2 px-2 mx-auto justify-center"
     ><LetterTile
       v-for="(letter, index) in lettersInGuess"
       :key="index"
