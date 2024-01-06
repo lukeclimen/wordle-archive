@@ -48,7 +48,7 @@ onMounted(() => {
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
-  if (screenHeight < 2 * screenWidth) {
+  if (screenWidth < 700 && screenHeight < 2 * screenWidth) {
     shortWideScreen.value = true;
   }
 });
