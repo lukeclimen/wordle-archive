@@ -1,4 +1,5 @@
 <template>
+  <SiteHeader />
   <div class="h-screen md:max-w-md lg:max-w-lg mx-auto py-3 flex flex-col justify-center">
     <div class="flex flex-col gap-y-2 pb-3">
       <GridRow
@@ -23,6 +24,7 @@ import { computed, onMounted, ref } from 'vue';
 import { useGameStore } from './stores/GameStore';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
+import SiteHeader from './components/SiteHeader.vue';
 
 const gameStore = useGameStore();
 const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterArray } =
