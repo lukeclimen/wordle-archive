@@ -13,7 +13,7 @@
     "test:unit": "vitest --root src/"
   },
   "dependencies": {
-    "@heroicons/vue": "^2.0.18",
+    "@heroicons/vue": "^2.1.1",
     "pinia": "^2.1.3",
     "vue": "^3.3.4"
   },
