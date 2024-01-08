@@ -4,6 +4,8 @@ export const useGameStore = defineStore('Game Store', {
   state: () => {
     return {
       wordOfTheDay: '',
+      gameEnded: false,
+      gameLost: false,
       isLoading: false,
       isErrored: false,
       errorMessage: null,
@@ -35,7 +37,7 @@ export const useGameStore = defineStore('Game Store', {
       return state.amountOfGuesses;
     },
     getLostGame(state) {
-      return state.amountOfGuesses >= 6;
+      return state.gameLost;
     },
     getCurrentGuessWord(state) {
       return state.currentGuessWord;
@@ -51,6 +53,9 @@ export const useGameStore = defineStore('Game Store', {
     },
     getwrongGuessLetterArray(state) {
       return state.wrongGuessLetters;
+    },
+    getGameEnded(state) {
+      return state.gameEnded;
     }
   },
   actions: {
@@ -81,22 +86,26 @@ export const useGameStore = defineStore('Game Store', {
     checkGuess() {
       // TODO: Add legal word check
       if (this.getGuessCount >= 6) {
-        return false;
+        // If the user tries entering another guess after the end of the game
+        this.setGameLost();
+        return;
       }
-      if (
-        this.checkForFullWord &&
-        this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()
-      ) {
+      if (this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()) {
+        // If the guess was correct
         const correctWordArray = this.wordOfTheDay.split('');
         correctWordArray.forEach((letter) => {
           this.addCorrectLetter(letter);
           this.removeWrongPositionLetter(letter);
         });
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
-        return true;
+        // This sets the game as over (and lost is false)
+        this.setGameEnded();
+        return;
       } else if (!this.checkForFullWord) {
-        return false;
+        // If the user hits enter without a full word as a guess
+        return;
       } else {
+        // Otherwise, a full word guess that isn't correct
         const incorrectWordArray = this.currentGuessWord.split('');
         incorrectWordArray.forEach((letter, index) => {
           if (this.wordOfTheDay.includes(letter)) {
@@ -140,6 +149,13 @@ export const useGameStore = defineStore('Game Store', {
         const indexOfLetter = this.wrongPositionLetters.indexOf(letter);
         this.wrongPositionLetters.splice(indexOfLetter, 1);
       }
+    },
+    setGameLost() {
+      this.gameLost = true;
+      this.setGameEnded();
+    },
+    setGameEnded() {
+      this.gameEnded = true;
     }
   }
 });
