@@ -80,6 +80,9 @@ export const useGameStore = defineStore('Game Store', {
     },
     checkGuess() {
       // TODO: Add legal word check
+      if (this.getGuessCount >= 6) {
+        return false;
+      }
       if (
         this.checkForFullWord &&
         this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()
