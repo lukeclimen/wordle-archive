@@ -1,4 +1,12 @@
 <template>
+  <EndOfGameModal
+    v-if="gameOver"
+    games-played="1"
+    games-won="1"
+    streak="1"
+    max-streak="1"
+    :guess-distribution="guessDistribution"
+  />
   <SiteHeader @openSettings="handleToggleSettings('open')" />
   <SettingsModal
     :class="{ hidden: settingsClosed }"
@@ -30,6 +38,7 @@ import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
 import SettingsModal from './components/SettingsModal.vue';
+import EndOfGameModal from './components/EndOfGameModal.vue';
 
 const gameStore = useGameStore();
 const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterArray } =
@@ -38,6 +47,21 @@ const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterA
 const gridRowContents = computed(() => gameStore.getGuessList);
 const activeRow = computed(() => gameStore.getGuessCount);
 const currentRowGuess = computed(() => gameStore.getCurrentGuessWord);
+const gameOver = computed(() => gameStore.gameEnded);
+const guessDistribution = computed(() => {
+  if (gameStore.gameEnded) {
+    if (gameStore.gameLost) {
+      return [0, 0, 0, 0, 0, 0];
+    } else {
+      const numberOfGuesses = gameStore.getGuessCount;
+      const distributionArray = [0, 0, 0, 0, 0, 0];
+      distributionArray[numberOfGuesses - 1] = 1;
+      return distributionArray;
+    }
+  } else {
+    return [0, 0, 0, 0, 0, 0];
+  }
+});
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
 
