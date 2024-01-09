@@ -10,7 +10,7 @@
           @click="$emit('close')"
         />
       </div>
-      <div class="flex flex-col m-8">
+      <div class="flex flex-col m-8 h-full">
         <div class="flex flex-row justify-between py-8">
           <div class="flex flex-col items-center">
             <p class="text-2xl">{{ gamesPlayed }}</p>
@@ -42,6 +42,14 @@
             </div>
           </div>
         </div>
+        <div class="w-full h-full flex justify-center items-center">
+          <button
+            class="flex bg-green-700 w-3/4 rounded-full h-fit text-xl font-bold text-white py-2 shadow-lg justify-center items-center gap-x-4"
+          >
+            Share
+            <ShareIcon class="w-5 stroke-2" />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -50,6 +58,7 @@
 <script setup>
 import { ref } from 'vue';
 import { XMarkIcon } from '@heroicons/vue/24/solid';
+import { ShareIcon } from '@heroicons/vue/24/outline';
 defineEmits(['close']);
 const props = defineProps({
   gamesPlayed: {
