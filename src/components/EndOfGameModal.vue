@@ -47,7 +47,7 @@
             class="flex bg-green-700 w-3/4 rounded-full h-fit text-xl font-bold text-white py-2 shadow-lg justify-center items-center gap-x-4"
           >
             Share
-            <ShareIcon class="w-5 stroke-2" />
+            <ShareIcon class="w-5 stroke-2" @click="$emit('share')" />
           </button>
         </div>
       </div>
@@ -59,7 +59,7 @@
 import { ref } from 'vue';
 import { XMarkIcon } from '@heroicons/vue/24/solid';
 import { ShareIcon } from '@heroicons/vue/24/outline';
-defineEmits(['close']);
+defineEmits(['close', 'share']);
 const props = defineProps({
   gamesPlayed: {
     type: Number,

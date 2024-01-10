@@ -7,6 +7,7 @@
     :max-streak="1"
     :guess-distribution="guessDistribution"
     @close="handleToggleEndGameModal('closed')"
+    @share="handleShareButtonClick"
   />
   <SiteHeader @openSettings="handleToggleSettings('open')" />
   <SettingsModal
@@ -35,6 +36,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
+import { generateGameCopy } from './utils';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
@@ -87,6 +89,14 @@ const handleToggleSettings = (modalStatus) => {
 
 const handleToggleEndGameModal = (modalStatus) => {
   gameOverModalClosed.value = modalStatus === 'closed' ? true : false;
+};
+
+const handleShareButtonClick = async () => {
+  await generateGameCopy(
+    gameStore.getWordOfTheDay,
+    gameStore.getGuessCount,
+    gameStore.getGuessList
+  );
 };
 
 onMounted(() => {
