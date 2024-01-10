@@ -1,4 +1,14 @@
 <template>
+  <EndOfGameModal
+    :class="{ hidden: gameOverModalClosed }"
+    :games-played="1"
+    :games-won="1"
+    :streak="1"
+    :max-streak="1"
+    :guess-distribution="guessDistribution"
+    @close="handleToggleEndGameModal('closed')"
+    @share="handleShareButtonClick"
+  />
   <SiteHeader @openSettings="handleToggleSettings('open')" />
   <SettingsModal
     :class="{ hidden: settingsClosed }"
@@ -24,12 +34,14 @@
 </template>
 
 <script setup>
-import { computed, onMounted, ref } from 'vue';
+import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
+import { generateGameCopy } from './utils';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
 import SettingsModal from './components/SettingsModal.vue';
+import EndOfGameModal from './components/EndOfGameModal.vue';
 
 const gameStore = useGameStore();
 const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterArray } =
@@ -38,11 +50,33 @@ const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterA
 const gridRowContents = computed(() => gameStore.getGuessList);
 const activeRow = computed(() => gameStore.getGuessCount);
 const currentRowGuess = computed(() => gameStore.getCurrentGuessWord);
+const gameOver = computed(() => gameStore.gameEnded);
+const guessDistribution = computed(() => {
+  if (gameStore.gameEnded) {
+    if (gameStore.gameLost) {
+      return [0, 0, 0, 0, 0, 0];
+    } else {
+      const numberOfGuesses = gameStore.getGuessCount;
+      const distributionArray = [0, 0, 0, 0, 0, 0];
+      distributionArray[numberOfGuesses - 1] = 1;
+      return distributionArray;
+    }
+  } else {
+    return [0, 0, 0, 0, 0, 0];
+  }
+});
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
+const gameOverModalClosed = ref(true);
+
+watch(gameOver, () => {
+  handleToggleEndGameModal('open)');
+});
 
 const handleLetterPress = (content) => {
-  if (content === 'enter') {
+  if (gameOver.value) {
+    handleToggleEndGameModal('open');
+  } else if (content === 'enter') {
     gameStore.checkGuess();
   } else if (content === 'back') {
     gameStore.removeLetterFromGuess();
@@ -51,8 +85,20 @@ const handleLetterPress = (content) => {
   }
 };
 
-const handleToggleSettings = (settingsModalStatus) => {
-  settingsClosed.value = settingsModalStatus === 'closed' ? true : false;
+const handleToggleSettings = (modalStatus) => {
+  settingsClosed.value = modalStatus === 'closed' ? true : false;
+};
+
+const handleToggleEndGameModal = (modalStatus) => {
+  gameOverModalClosed.value = modalStatus === 'closed' ? true : false;
+};
+
+const handleShareButtonClick = async () => {
+  await generateGameCopy(
+    gameStore.getWordOfTheDay,
+    gameStore.getGuessCount,
+    gameStore.getGuessList
+  );
 };
 
 onMounted(() => {
