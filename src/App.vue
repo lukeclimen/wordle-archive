@@ -1,10 +1,10 @@
 <template>
   <EndOfGameModal
     :class="{ hidden: gameOverModalClosed }"
-    games-played="1"
-    games-won="1"
-    streak="1"
-    max-streak="1"
+    :games-played="1"
+    :games-won="1"
+    :streak="1"
+    :max-streak="1"
     :guess-distribution="guessDistribution"
     @close="handleToggleEndGameModal('closed')"
   />
