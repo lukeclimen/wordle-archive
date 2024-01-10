@@ -74,7 +74,9 @@ watch(gameOver, () => {
 });
 
 const handleLetterPress = (content) => {
-  if (content === 'enter') {
+  if (gameOver.value) {
+    handleToggleEndGameModal('open');
+  } else if (content === 'enter') {
     gameStore.checkGuess();
   } else if (content === 'back') {
     gameStore.removeLetterFromGuess();
