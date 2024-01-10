@@ -18,9 +18,7 @@ export const generateGameCopy = async (wordOfTheDay, guessCount, guessList) => {
   }
 
   try {
-    console.log('trying to copy to clipboard');
     await navigator.clipboard.writeText(gameCopy);
-    console.log('Copied to clipboard');
   } catch (error) {
     console.error(error.name, error.message);
   }
