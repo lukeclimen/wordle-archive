@@ -46,9 +46,20 @@ defineProps({
 .correct-position,
 .wrong-position,
 .absent {
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  transform: scaleX(180deg);
+  animation: flip-vertical 0.8s forwards;
+  transform-origin: center;
+}
+
+@keyframes flip-vertical {
+  0% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0);
+  }
+  100% {
+    transform: scaleY(1);
+  }
 }
 
 .correct-position {
