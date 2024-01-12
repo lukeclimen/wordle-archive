@@ -54,19 +54,4 @@ defineProps({
     transform: scaleY(1);
   }
 }
-
-.correct-position {
-  border-color: #538d4e;
-  transition: border-color 0.5s;
-}
-
-.wrong-position {
-  border-color: #c9b458;
-  transition: border-color 0.5s;
-}
-
-.absent {
-  border-color: #787c7e;
-  transition: border-color 0.5s;
-}
 </style>
