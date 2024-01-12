@@ -1,7 +1,11 @@
 <template>
   <div
-    class="flex justify-center items-center w-full aspect-square border-2 border-gray-500 uppercase"
-    v-bind:class="[{ flip: letterState }]"
+    class="flex justify-center items-center w-full aspect-square box-content border-2 border-gray-500 uppercase"
+    :class="[
+      !letterState && content ? 'not-empty' : '',
+      letterState ? 'flip' : '',
+      letterState
+    ]"
   >
     <LetterBackground :letter-state="letterState">
       <BaseLetter
@@ -39,21 +43,59 @@ defineProps({
 }
 
 .flip {
-  animation: flip-vertical 0.8s forwards;
+  animation: flip-vertical 0.75s forwards;
   transform-origin: center;
 }
 
 @keyframes flip-vertical {
   0% {
-    transform: scaleY(1);
+    rotate: x 0deg;
   }
   50% {
-    transform: scaleY(0);
-    border-style: none;
+    rotate: x 90deg;
   }
   100% {
-    transform: scaleY(1);
-    border-style: none;
+    rotate: x 0deg;
   }
+}
+
+.wrongPosition {
+  transition: border-color 0.375s 0.375s;
+  border-color: #c9b458;
+}
+
+.correct {
+  transition: border-color 0.375s 0.375s;
+  border-color: #538d4e;
+}
+
+.notInWord {
+  transition: border-color 0.375s 0.375s;
+  border-color: #787c7e;
+}
+
+.letter-1 {
+  animation-delay: 0s;
+  transition-delay: 0s;
+}
+
+.letter-2 {
+  animation-delay: 0.5s;
+  transition-delay: 0.5s;
+}
+
+.letter-3 {
+  animation-delay: 1s;
+  transition-delay: 1s;
+}
+
+.letter-4 {
+  animation-delay: 1.5s;
+  transition-delay: 1.5s;
+}
+
+.letter-5 {
+  animation-delay: 2s;
+  transition-delay: 2s;
 }
 </style>

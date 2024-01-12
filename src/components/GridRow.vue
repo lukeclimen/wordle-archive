@@ -5,6 +5,7 @@
       :key="index"
       :content="letter"
       :letter-state="locked ? letterStateArray[index] : null"
+      :class="`letter-${index + 1}`"
   /></span>
 </template>
 
