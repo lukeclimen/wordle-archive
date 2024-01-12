@@ -60,42 +60,42 @@ defineProps({
 }
 
 .wrongPosition {
-  transition: border-color 0.375s 0.375s;
+  transition-property: border-color;
   border-color: #c9b458;
 }
 
 .correct {
-  transition: border-color 0.375s 0.375s;
+  transition-property: border-color;
   border-color: #538d4e;
 }
 
 .notInWord {
-  transition: border-color 0.375s 0.375s;
+  transition-property: border-color;
   border-color: #787c7e;
 }
 
 .letter-1 {
   animation-delay: 0s;
-  transition-delay: 0s;
+  transition-delay: 0.375s;
 }
 
 .letter-2 {
   animation-delay: 0.5s;
-  transition-delay: 0.5s;
+  transition-delay: 0.875s;
 }
 
 .letter-3 {
   animation-delay: 1s;
-  transition-delay: 1s;
+  transition-delay: 1.375s;
 }
 
 .letter-4 {
   animation-delay: 1.5s;
-  transition-delay: 1.5s;
+  transition-delay: 1.875s;
 }
 
 .letter-5 {
   animation-delay: 2s;
-  transition-delay: 2s;
+  transition-delay: 2.375s;
 }
 </style>

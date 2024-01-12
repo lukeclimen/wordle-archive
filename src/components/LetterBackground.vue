@@ -44,22 +44,22 @@ defineProps({
 
 .correct {
   background-color: #538d4e;
-  transition: background-color 0s 0.6s;
+  transition-property: background-color;
 }
 
 .wrong-position {
   background-color: #c9b458;
-  transition: background-color 0s 0.6s;
+  transition-property: background-color;
 }
 
 .not-in-word {
   background-color: #787c7e;
-  transition: background-color 0s 0.6s;
+  transition-property: background-color;
 }
 
 .default {
   background-color: #d3d6da;
-  transition: background-color 0s 0.6s;
+  transition-property: background-color;
 }
 
 .letter-1 > div {
