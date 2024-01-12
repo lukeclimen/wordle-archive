@@ -1,7 +1,7 @@
 <template>
   <div
     class="flex justify-center items-center w-full aspect-square border-2 border-gray-500 uppercase"
-    v-bind:class="[{ 'border-none flip': letterState }]"
+    v-bind:class="[{ flip: letterState }]"
   >
     <LetterBackground :letter-state="letterState">
       <BaseLetter
@@ -49,9 +49,11 @@ defineProps({
   }
   50% {
     transform: scaleY(0);
+    border-style: none;
   }
   100% {
     transform: scaleY(1);
+    border-style: none;
   }
 }
 </style>

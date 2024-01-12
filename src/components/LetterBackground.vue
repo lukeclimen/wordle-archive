@@ -39,21 +39,26 @@ defineProps({
 }
 .not-locked {
   background-color: white;
+  transition: background-color 0s 0.5s;
 }
 
 .correct {
   background-color: #538d4e;
+  transition: background-color 0s 0.5s;
 }
 
 .wrong-position {
   background-color: #c9b458;
+  transition: background-color 0s 0.5s;
 }
 
 .not-in-word {
   background-color: #787c7e;
+  transition: background-color 0s 0.5s;
 }
 
 .default {
   background-color: #d3d6da;
+  transition: background-color 0s 0.5s;
 }
 </style>

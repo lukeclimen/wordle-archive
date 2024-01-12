@@ -2,7 +2,7 @@
   <p
     class="uppercase font-bold w-5"
     v-if="letter"
-    :class="[colour === 'white' ? 'text-white' : 'text-black']"
+    :class="[colour === 'white' ? 'white' : 'black']"
   >
     {{ letter.charAt(0) }}
   </p>
@@ -25,4 +25,12 @@ defineProps({
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.white {
+  color: white;
+  transition: color 0s 0.5s;
+}
+.black {
+  color: black;
+}
+</style>
