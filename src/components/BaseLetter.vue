@@ -28,9 +28,30 @@ defineProps({
 <style scoped>
 .white {
   color: white;
-  transition: color 0s 0.5s;
+  transition-property: color;
 }
 .black {
   color: black;
+  transition-property: color;
+}
+
+.letter-1 p {
+  transition-delay: 0.375s;
+}
+
+.letter-2 p {
+  transition-delay: 0.875s;
+}
+
+.letter-3 p {
+  transition-delay: 1.375s;
+}
+
+.letter-4 p {
+  transition-delay: 1.875s;
+}
+
+.letter-5 p {
+  transition-delay: 2.375s;
 }
 </style>
