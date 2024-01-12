@@ -1,12 +1,7 @@
 <template>
   <div
     class="flex justify-center items-center w-full aspect-square border-2 border-gray-500 uppercase"
-    v-bind:class="[
-      { 'not-empty': content },
-      { 'correct-position': letterState === 'correct' },
-      { 'wrong-position': letterState === 'wrongPosition' },
-      { absent: letterState === 'notInWord' }
-    ]"
+    v-bind:class="[{ 'border-none flip': letterState }]"
   >
     <LetterBackground :letter-state="letterState">
       <BaseLetter
@@ -43,9 +38,7 @@ defineProps({
   border-color: black;
 }
 
-.correct-position,
-.wrong-position,
-.absent {
+.flip {
   animation: flip-vertical 0.8s forwards;
   transform-origin: center;
 }
@@ -64,13 +57,16 @@ defineProps({
 
 .correct-position {
   border-color: #538d4e;
+  transition: border-color 0.5s;
 }
 
 .wrong-position {
   border-color: #c9b458;
+  transition: border-color 0.5s;
 }
 
 .absent {
   border-color: #787c7e;
+  transition: border-color 0.5s;
 }
 </style>
