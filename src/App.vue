@@ -1,4 +1,8 @@
 <template>
+  <ConfettiBackground
+    v-if="gameWon"
+    class="absolute h-screen w-full top-0 left-0 -z-50 m-auto"
+  />
   <EndOfGameModal
     :class="{ hidden: gameOverModalClosed }"
     :games-played="1"
@@ -44,6 +48,7 @@ import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
 import SettingsModal from './components/SettingsModal.vue';
 import EndOfGameModal from './components/EndOfGameModal.vue';
+import ConfettiBackground from './components/ConfettiBackground.vue';
 
 const gameStore = useGameStore();
 const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterArray } =
@@ -70,11 +75,13 @@ const guessDistribution = computed(() => {
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
+const gameWon = ref(false);
 
 watch(gameOver, () => {
   if (gameStore.getLostGame) {
     toastNotification('Game Over', 'error');
   } else {
+    gameWon.value = true;
     toastNotification('Congratulations!', 'success');
   }
   setTimeout(() => {
