@@ -70,7 +70,9 @@ const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
 
 watch(gameOver, () => {
-  handleToggleEndGameModal('open)');
+  setTimeout(() => {
+    handleToggleEndGameModal('open)');
+  }, 3000);
 });
 
 const handleLetterPress = (content) => {
