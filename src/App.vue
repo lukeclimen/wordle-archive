@@ -72,7 +72,11 @@ const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
 
 watch(gameOver, () => {
-  toastNotification();
+  if (gameStore.getLostGame) {
+    toastNotification('Game Over', 'error');
+  } else {
+    toastNotification('Congratulations!', 'success');
+  }
   setTimeout(() => {
     handleToggleEndGameModal('open)');
   }, 3000);
@@ -106,12 +110,41 @@ const handleShareButtonClick = async () => {
   );
 };
 
-const toastNotification = () => {
-  toast.success('Game Over', {
-    position: toast.POSITION.TOP_CENTER,
-    transition: toast.TRANSITIONS.FLIP,
-    autoClose: 1000
-  });
+const toastNotification = (message, type) => {
+  if (type === 'success') {
+    toast.success(message, {
+      theme: 'colored',
+      type: 'default',
+      position: 'top-center',
+      closeOnClick: false,
+      pauseOnHover: false,
+      autoClose: 2000,
+      hideProgressBar: true,
+      transition: 'flip'
+    });
+  } else if (type === 'error') {
+    toast.error(message, {
+      theme: 'colored',
+      type: 'default',
+      position: 'top-center',
+      closeOnClick: false,
+      pauseOnHover: false,
+      autoClose: 2000,
+      hideProgressBar: true,
+      transition: 'flip'
+    });
+  } else {
+    toast(message, {
+      theme: 'colored',
+      type: 'default',
+      position: 'top-center',
+      closeOnClick: false,
+      pauseOnHover: false,
+      autoClose: 2000,
+      hideProgressBar: true,
+      transition: 'flip'
+    });
+  }
 };
 
 onMounted(() => {
@@ -124,3 +157,20 @@ onMounted(() => {
   }
 });
 </script>
+
+<style>
+.Toastify button,
+.Toastify .Toastify__toast-icon {
+  display: none;
+}
+
+.Toastify__toast-container {
+  width: fit-content;
+  text-align: center;
+}
+
+div[data-testid='toast-content'] {
+  font-weight: bold;
+  font-size: large;
+}
+</style>
