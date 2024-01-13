@@ -37,6 +37,8 @@
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
 import { generateGameCopy } from './utils';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
@@ -70,6 +72,7 @@ const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
 
 watch(gameOver, () => {
+  toastNotification();
   setTimeout(() => {
     handleToggleEndGameModal('open)');
   }, 3000);
@@ -101,6 +104,14 @@ const handleShareButtonClick = async () => {
     gameStore.getGuessCount,
     gameStore.getGuessList
   );
+};
+
+const toastNotification = () => {
+  toast.success('Game Over', {
+    position: toast.POSITION.TOP_CENTER,
+    transition: toast.TRANSITIONS.FLIP,
+    autoClose: 1000
+  });
 };
 
 onMounted(() => {
