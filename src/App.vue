@@ -26,6 +26,7 @@
         :key="index"
         :locked="index < activeRow ? true : false"
         :guess="index === activeRow ? currentRowGuess : element"
+        :id="`row-${index}`"
       />
     </div>
     <KeyBoard
@@ -40,7 +41,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
-import { generateGameCopy } from './utils';
+import { generateGameCopy } from './utils/UtilFunctions';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
@@ -79,7 +80,7 @@ const gameWon = ref(false);
 
 watch(gameOver, () => {
   if (gameStore.getLostGame) {
-    toastNotification('Game Over', 'error');
+    toastNotification(gameStore.wordOfTheDay.toLocaleUpperCase(), 'error');
   } else {
     gameWon.value = true;
     toastNotification('Congratulations!', 'success');
@@ -93,7 +94,15 @@ const handleLetterPress = (content) => {
   if (gameOver.value) {
     handleToggleEndGameModal('open');
   } else if (content === 'enter') {
-    gameStore.checkGuess();
+    if (gameStore.validateGuessWord()) {
+      gameStore.checkGuess();
+    } else {
+      const currentRow = document.getElementById(`row-${activeRow.value}`);
+      currentRow.classList.add('shake');
+      setTimeout(() => {
+        currentRow.classList.remove('shake');
+      }, 1000);
+    }
   } else if (content === 'back') {
     gameStore.removeLetterFromGuess();
   } else {
@@ -138,7 +147,8 @@ const toastNotification = (message, type) => {
       pauseOnHover: false,
       autoClose: 2000,
       hideProgressBar: true,
-      transition: 'flip'
+      transition: 'flip',
+      style: 'letter-spacing: 2px;'
     });
   } else {
     toast(message, {

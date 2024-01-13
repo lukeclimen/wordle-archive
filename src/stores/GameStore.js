@@ -1,4 +1,6 @@
 import { defineStore } from 'pinia';
+import { randomlySelectedWordOfTheDay } from '../utils/UtilFunctions.js';
+import { searchForAcceptableGuess } from '../utils/UtilFunctions';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
@@ -62,7 +64,7 @@ export const useGameStore = defineStore('Game Store', {
     fetchWordOfTheDay() {
       // TODO: Add fetch request once an endpoint is created
       // Currently only mocking the request and using "CLICK"
-      this.wordOfTheDay = 'weary'.toLocaleLowerCase();
+      this.wordOfTheDay = randomlySelectedWordOfTheDay();
     },
     setLoading() {
       this.isLoading = true;
@@ -84,11 +86,10 @@ export const useGameStore = defineStore('Game Store', {
       this.currentGuessWord = '';
     },
     checkGuess() {
-      // TODO: Add legal word check
       if (this.getGuessCount >= 6) {
         // If the user tries entering another guess after the end of the game
         this.setGameLost();
-        return;
+        return false;
       }
       if (this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()) {
         // If the guess was correct
@@ -100,7 +101,7 @@ export const useGameStore = defineStore('Game Store', {
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
         // This sets the game as over (and lost is false)
         this.setGameEnded();
-        return;
+        return true;
       } else if (!this.checkForFullWord) {
         // If the user hits enter without a full word as a guess
         return;
@@ -158,10 +159,13 @@ export const useGameStore = defineStore('Game Store', {
       this.gameEnded = true;
     },
     incrementGuessCount() {
-      this.amountOfGuesses++;
       if (this.amountOfGuesses >= 6) {
         this.setGameLost();
       }
+      this.amountOfGuesses++;
+    },
+    validateGuessWord() {
+      return searchForAcceptableGuess(this.currentGuessWord);
     }
   }
 });
