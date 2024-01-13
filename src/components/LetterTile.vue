@@ -31,7 +31,7 @@ defineProps({
     type: String,
     required: false,
     validator(value) {
-      return ['correct', 'wrongPosition', 'notInWord'].includes(value);
+      return ['correctPosition', 'wrongPosition', 'notInWord'].includes(value);
     }
   }
 });
@@ -64,7 +64,7 @@ defineProps({
   border-color: #c9b458;
 }
 
-.correct {
+.correctPosition {
   transition-property: border-color;
   border-color: #538d4e;
 }

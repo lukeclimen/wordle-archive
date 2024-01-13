@@ -3,7 +3,7 @@
     class="flex justify-center items-center"
     :class="[
       { 'not-locked': letterState === 'notLocked' },
-      { correct: letterState === 'correct' },
+      { 'correct-position': letterState === 'correctPosition' },
       { 'wrong-position': letterState === 'wrongPosition' },
       { 'not-in-word': letterState === 'notInWord' },
       { default: letterState === 'default' }
@@ -20,9 +20,13 @@ defineProps({
     required: false,
     default: 'notLocked',
     validator(value) {
-      return ['default', 'notLocked', 'correct', 'wrongPosition', 'notInWord'].includes(
-        value
-      );
+      return [
+        'default',
+        'notLocked',
+        'correctPosition',
+        'wrongPosition',
+        'notInWord'
+      ].includes(value);
     }
   }
 });
@@ -31,7 +35,7 @@ defineProps({
 <style scoped>
 .default,
 .not-locked,
-.correct,
+.correct-position,
 .wrong-position,
 .not-in-word {
   width: 100%;
@@ -42,7 +46,7 @@ defineProps({
   transition: all 0s 0.6s;
 }
 
-.correct {
+.correct-position {
   background-color: #538d4e;
   transition-property: background-color;
 }

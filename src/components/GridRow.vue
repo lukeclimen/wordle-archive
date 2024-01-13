@@ -50,7 +50,7 @@ const letterStateArray = computed(() => {
   guessLetterArray.forEach((letter, index) => {
     if (gameStore.wordOfTheDay.includes(letter)) {
       if (gameStore.wordOfTheDay[index] === letter) {
-        letterStateArray.push('correct');
+        letterStateArray.push('correctPosition');
       } else {
         letterStateArray.push('wrongPosition');
       }
