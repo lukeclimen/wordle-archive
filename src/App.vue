@@ -79,7 +79,7 @@ const gameWon = ref(false);
 
 watch(gameOver, () => {
   if (gameStore.getLostGame) {
-    toastNotification('Game Over', 'error');
+    toastNotification(gameStore.wordOfTheDay.toLocaleUpperCase(), 'error');
   } else {
     gameWon.value = true;
     toastNotification('Congratulations!', 'success');
@@ -138,7 +138,8 @@ const toastNotification = (message, type) => {
       pauseOnHover: false,
       autoClose: 2000,
       hideProgressBar: true,
-      transition: 'flip'
+      transition: 'flip',
+      style: 'letter-spacing: 2px;'
     });
   } else {
     toast(message, {
