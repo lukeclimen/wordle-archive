@@ -159,10 +159,10 @@ export const useGameStore = defineStore('Game Store', {
       this.gameEnded = true;
     },
     incrementGuessCount() {
-      this.amountOfGuesses++;
       if (this.amountOfGuesses >= 6) {
         this.setGameLost();
       }
+      this.amountOfGuesses++;
     }
   }
 });
