@@ -40,7 +40,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
-import { generateGameCopy } from './utils';
+import { generateGameCopy } from './utils/utilFunctions';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
