@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { randomlySelectedWordOfTheDay } from '../utils/UtilFunctions.js';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
@@ -62,7 +63,7 @@ export const useGameStore = defineStore('Game Store', {
     fetchWordOfTheDay() {
       // TODO: Add fetch request once an endpoint is created
       // Currently only mocking the request and using "CLICK"
-      this.wordOfTheDay = 'weary'.toLocaleLowerCase();
+      this.wordOfTheDay = randomlySelectedWordOfTheDay();
     },
     setLoading() {
       this.isLoading = true;
