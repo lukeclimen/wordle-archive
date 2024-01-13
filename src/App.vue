@@ -1,4 +1,8 @@
 <template>
+  <ConfettiBackground
+    v-if="gameWon"
+    class="absolute h-screen w-full top-0 left-0 -z-50 m-auto"
+  />
   <EndOfGameModal
     :class="{ hidden: gameOverModalClosed }"
     :games-played="1"
@@ -37,11 +41,14 @@
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
 import { generateGameCopy } from './utils';
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
 import SettingsModal from './components/SettingsModal.vue';
 import EndOfGameModal from './components/EndOfGameModal.vue';
+import ConfettiBackground from './components/ConfettiBackground.vue';
 
 const gameStore = useGameStore();
 const { getCorrectLetterArray, getwrongGuessLetterArray, getwrongPositionLetterArray } =
@@ -68,9 +75,18 @@ const guessDistribution = computed(() => {
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
+const gameWon = ref(false);
 
 watch(gameOver, () => {
-  handleToggleEndGameModal('open)');
+  if (gameStore.getLostGame) {
+    toastNotification('Game Over', 'error');
+  } else {
+    gameWon.value = true;
+    toastNotification('Congratulations!', 'success');
+  }
+  setTimeout(() => {
+    handleToggleEndGameModal('open)');
+  }, 3000);
 });
 
 const handleLetterPress = (content) => {
@@ -101,6 +117,43 @@ const handleShareButtonClick = async () => {
   );
 };
 
+const toastNotification = (message, type) => {
+  if (type === 'success') {
+    toast.success(message, {
+      theme: 'colored',
+      type: 'default',
+      position: 'top-center',
+      closeOnClick: false,
+      pauseOnHover: false,
+      autoClose: 2000,
+      hideProgressBar: true,
+      transition: 'flip'
+    });
+  } else if (type === 'error') {
+    toast.error(message, {
+      theme: 'colored',
+      type: 'default',
+      position: 'top-center',
+      closeOnClick: false,
+      pauseOnHover: false,
+      autoClose: 2000,
+      hideProgressBar: true,
+      transition: 'flip'
+    });
+  } else {
+    toast(message, {
+      theme: 'colored',
+      type: 'default',
+      position: 'top-center',
+      closeOnClick: false,
+      pauseOnHover: false,
+      autoClose: 2000,
+      hideProgressBar: true,
+      transition: 'flip'
+    });
+  }
+};
+
 onMounted(() => {
   gameStore.fetchWordOfTheDay();
   const screenWidth = window.innerWidth;
@@ -111,3 +164,26 @@ onMounted(() => {
   }
 });
 </script>
+
+<style>
+.Toastify__toast-container--top-center {
+  left: 50%;
+  top: 1em;
+  transform: translateX(-50%);
+}
+
+.Toastify button,
+.Toastify .Toastify__toast-icon {
+  display: none;
+}
+
+.Toastify__toast-container {
+  width: fit-content;
+  text-align: center;
+}
+
+div[data-testid='toast-content'] {
+  font-weight: bold;
+  font-size: large;
+}
+</style>

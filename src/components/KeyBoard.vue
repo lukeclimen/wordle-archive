@@ -64,7 +64,7 @@ const handleKeyClick = (content) => emit('letterPress', content);
 
 const lookupState = (letter) => {
   if (props.correctLetters.includes(letter)) {
-    return 'correct';
+    return 'correctPosition';
   } else if (props.wrongPositionLetters.includes(letter)) {
     return 'wrongPosition';
   } else if (props.wrongGuessLetters.includes(letter)) {

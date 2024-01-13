@@ -42,7 +42,7 @@ const props = defineProps({
     required: false,
     default: 'default',
     validator(value) {
-      return ['default', 'correct', 'wrongPosition', 'notInWord'].includes(value);
+      return ['default', 'correctPosition', 'wrongPosition', 'notInWord'].includes(value);
     }
   }
 });

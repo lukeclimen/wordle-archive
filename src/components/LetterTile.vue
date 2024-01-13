@@ -1,11 +1,10 @@
 <template>
   <div
-    class="flex justify-center items-center w-full aspect-square border-2 border-gray-500 uppercase"
-    v-bind:class="[
-      { 'not-empty': content },
-      { 'correct-position': letterState === 'correct' },
-      { 'wrong-position': letterState === 'wrongPosition' },
-      { absent: letterState === 'notInWord' }
+    class="flex justify-center items-center w-full aspect-square box-content border-2 border-gray-500 uppercase"
+    :class="[
+      !letterState && content ? 'not-empty' : '',
+      letterState ? 'flip' : '',
+      letterState
     ]"
   >
     <LetterBackground :letter-state="letterState">
@@ -32,7 +31,7 @@ defineProps({
     type: String,
     required: false,
     validator(value) {
-      return ['correct', 'wrongPosition', 'notInWord'].includes(value);
+      return ['correctPosition', 'wrongPosition', 'notInWord'].includes(value);
     }
   }
 });
@@ -43,23 +42,60 @@ defineProps({
   border-color: black;
 }
 
-.correct-position,
-.wrong-position,
-.absent {
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  transform: scaleX(180deg);
+.flip {
+  animation: flip-vertical 0.75s forwards;
+  transform-origin: center;
 }
 
-.correct-position {
-  border-color: #538d4e;
+@keyframes flip-vertical {
+  0% {
+    rotate: x 0deg;
+  }
+  50% {
+    rotate: x 90deg;
+  }
+  100% {
+    rotate: x 0deg;
+  }
 }
 
-.wrong-position {
+.wrongPosition {
+  transition-property: border-color;
   border-color: #c9b458;
 }
 
-.absent {
+.correctPosition {
+  transition-property: border-color;
+  border-color: #538d4e;
+}
+
+.notInWord {
+  transition-property: border-color;
   border-color: #787c7e;
+}
+
+.letter-1 {
+  animation-delay: 0s;
+  transition-delay: 0.375s;
+}
+
+.letter-2 {
+  animation-delay: 0.5s;
+  transition-delay: 0.875s;
+}
+
+.letter-3 {
+  animation-delay: 1s;
+  transition-delay: 1.375s;
+}
+
+.letter-4 {
+  animation-delay: 1.5s;
+  transition-delay: 1.875s;
+}
+
+.letter-5 {
+  animation-delay: 2s;
+  transition-delay: 2.375s;
 }
 </style>
