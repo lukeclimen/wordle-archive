@@ -88,7 +88,7 @@ export const useGameStore = defineStore('Game Store', {
       if (this.getGuessCount >= 6) {
         // If the user tries entering another guess after the end of the game
         this.setGameLost();
-        return;
+        return false;
       }
       if (this.wordOfTheDay === this.currentGuessWord.toLocaleLowerCase()) {
         // If the guess was correct
@@ -100,7 +100,7 @@ export const useGameStore = defineStore('Game Store', {
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
         // This sets the game as over (and lost is false)
         this.setGameEnded();
-        return;
+        return true;
       } else if (!this.checkForFullWord) {
         // If the user hits enter without a full word as a guess
         return;
