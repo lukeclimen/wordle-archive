@@ -80,7 +80,7 @@ export const useGameStore = defineStore('Game Store', {
     },
     addGuessWord(guessWord) {
       this.guessList[this.amountOfGuesses] = guessWord;
-      this.amountOfGuesses++;
+      this.incrementGuessCount();
       this.currentGuessWord = '';
     },
     checkGuess() {
@@ -156,6 +156,12 @@ export const useGameStore = defineStore('Game Store', {
     },
     setGameEnded() {
       this.gameEnded = true;
+    },
+    incrementGuessCount() {
+      this.amountOfGuesses++;
+      if (this.amountOfGuesses >= 6) {
+        this.setGameLost();
+      }
     }
   }
 });
