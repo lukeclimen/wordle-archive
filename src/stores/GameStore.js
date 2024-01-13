@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { randomlySelectedWordOfTheDay } from '../utils/UtilFunctions.js';
+import { searchForAcceptableGuess } from '../utils/UtilFunctions';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
@@ -85,7 +86,6 @@ export const useGameStore = defineStore('Game Store', {
       this.currentGuessWord = '';
     },
     checkGuess() {
-      // TODO: Add legal word check
       if (this.getGuessCount >= 6) {
         // If the user tries entering another guess after the end of the game
         this.setGameLost();
@@ -163,6 +163,9 @@ export const useGameStore = defineStore('Game Store', {
         this.setGameLost();
       }
       this.amountOfGuesses++;
+    },
+    validateGuessWord() {
+      return searchForAcceptableGuess(this.currentGuessWord);
     }
   }
 });

@@ -26,6 +26,7 @@
         :key="index"
         :locked="index < activeRow ? true : false"
         :guess="index === activeRow ? currentRowGuess : element"
+        :id="`row-${index}`"
       />
     </div>
     <KeyBoard
@@ -93,7 +94,15 @@ const handleLetterPress = (content) => {
   if (gameOver.value) {
     handleToggleEndGameModal('open');
   } else if (content === 'enter') {
-    gameStore.checkGuess();
+    if (gameStore.validateGuessWord()) {
+      gameStore.checkGuess();
+    } else {
+      const currentRow = document.getElementById(`row-${activeRow.value}`);
+      currentRow.classList.add('shake');
+      setTimeout(() => {
+        currentRow.classList.remove('shake');
+      }, 1000);
+    }
   } else if (content === 'back') {
     gameStore.removeLetterFromGuess();
   } else {
