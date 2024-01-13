@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { searchForAcceptableGuess } from './UtilFunctions';
+import { searchForAcceptableGuess, randomlySelectedWordOfTheDay } from './UtilFunctions';
 
 describe('Guess Array Search function', () => {
   it('Finds words that exist in the array', () => {
@@ -61,5 +61,12 @@ describe('Guess Array Search function', () => {
       const result = searchForAcceptableGuess(word);
       expect(result).toStrictEqual(true);
     });
+  });
+});
+
+describe('Random Word of the Day Function', () => {
+  it('Correctly gets a word', () => {
+    const result = randomlySelectedWordOfTheDay();
+    expect(typeof result).toBe('string');
   });
 });

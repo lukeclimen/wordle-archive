@@ -1,4 +1,4 @@
-import { acceptableGuessList } from './UtilArrays';
+import { acceptableGuessList, wordOfTheDayList } from './UtilArrays';
 
 export const generateGameCopy = async (wordOfTheDay, guessCount, guessList) => {
   let gameCopy = '';
@@ -49,4 +49,10 @@ export const searchForAcceptableGuess = (guess) => {
 
   // If we got to this point, the guess is not in the list
   return false;
+};
+
+export const randomlySelectedWordOfTheDay = () => {
+  const maxIndex = wordOfTheDayList.length - 1;
+  const randomIndex = Math.floor(Math.random() * maxIndex);
+  return wordOfTheDayList[randomIndex];
 };
