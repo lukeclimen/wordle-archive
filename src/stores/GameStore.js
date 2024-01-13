@@ -155,7 +155,9 @@ export const useGameStore = defineStore('Game Store', {
       this.setGameEnded();
     },
     setGameEnded() {
-      this.gameEnded = true;
+      setTimeout(() => {
+        this.gameEnded = true;
+      }, 3000);
     },
     incrementGuessCount() {
       this.amountOfGuesses++;
