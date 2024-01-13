@@ -166,6 +166,12 @@ onMounted(() => {
 </script>
 
 <style>
+.Toastify__toast-container--top-center {
+  left: 50%;
+  top: 1em;
+  transform: translateX(-50%);
+}
+
 .Toastify button,
 .Toastify .Toastify__toast-icon {
   display: none;
