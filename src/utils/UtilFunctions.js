@@ -56,3 +56,18 @@ export const randomlySelectedWordOfTheDay = () => {
   const randomIndex = Math.floor(Math.random() * maxIndex);
   return wordOfTheDayList[randomIndex];
 };
+
+/**
+ * Determines the correct label for each letter in a guess
+ *
+ * Given a guess word and the word of the day, returns an array
+ * containing 'correctPosition', 'wrongPosition', or 'notInWord'
+ * for each letter in the guess word.
+ *
+ * @param {String} guess [Guess word]
+ * @param {String} wordOfTheDay [Word of the day]
+ * @returns {String[]} [Array of letter guess results]
+ */
+export const guessWordLetterPlacement = () => {
+  return ['', '', '', '', ''];
+};

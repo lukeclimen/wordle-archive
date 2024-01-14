@@ -1,5 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { searchForAcceptableGuess, randomlySelectedWordOfTheDay } from './UtilFunctions';
+import {
+  searchForAcceptableGuess,
+  randomlySelectedWordOfTheDay,
+  guessWordLetterPlacement
+} from './UtilFunctions';
 
 describe('Guess Array Search function', () => {
   it('Finds words that exist in the array', () => {
@@ -68,5 +72,34 @@ describe('Random Word of the Day Function', () => {
   it('Correctly gets a word', () => {
     const result = randomlySelectedWordOfTheDay();
     expect(typeof result).toBe('string');
+  });
+});
+
+describe('Guess-word Letter Placement Function', () => {
+  it('Correctly handles multiples of the same letter in the guess', () => {
+    const testWordsOfTheDay = ['there', 'there', 'fluff'];
+    const testGuessWords = ['weary', 'cheer', 'proof'];
+    const expectedResultArrays = [
+      // Comparing 'there' to 'weary'
+      ['notInWord', 'notInWord', 'wrongPosition', 'correctPosition', 'notInWord'],
+      // Comparing 'there' to 'cheer'
+      [
+        'notInWord',
+        'correctPosition',
+        'correctPosition',
+        'wrongPosition',
+        'wrongPosition'
+      ],
+      // Comparing 'fluff' to 'proof'
+      ['noInWord', 'notInWord', 'notInWord', 'notInWord', 'correctPosition']
+    ];
+
+    testWordsOfTheDay.forEach((_, index) => {
+      const result = guessWordLetterPlacement(
+        testGuessWords[index],
+        testWordsOfTheDay[index]
+      );
+      expect(result).toBe(expectedResultArrays[index]);
+    });
   });
 });
