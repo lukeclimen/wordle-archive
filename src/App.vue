@@ -1,41 +1,45 @@
 <template>
-  <ConfettiBackground
-    v-if="gameWon"
-    class="absolute h-screen w-full top-0 left-0 -z-50 m-auto"
-  />
-  <EndOfGameModal
-    :class="{ hidden: gameOverModalClosed }"
-    :games-played="1"
-    :games-won="1"
-    :streak="1"
-    :max-streak="1"
-    :guess-distribution="guessDistribution"
-    @close="handleToggleEndGameModal('closed')"
-    @share="handleShareButtonClick"
-  />
-  <SiteHeader @openSettings="handleToggleSettings('open')" />
-  <SettingsModal
-    :class="{ hidden: settingsClosed }"
-    @close="handleToggleSettings('closed')"
-  />
-  <div class="h-screen md:max-w-md lg:max-w-lg mx-auto py-3 flex flex-col justify-center">
-    <div class="flex flex-col gap-y-2 pb-3">
-      <GridRow
-        v-for="(element, index) in gridRowContents"
-        :class="shortWideScreen ? 'max-w-xs' : 'max-w-md'"
-        :key="index"
-        :locked="index < activeRow ? true : false"
-        :guess="index === activeRow ? currentRowGuess : element"
-        :id="`row-${index}`"
-        :letter-state-array="guessWordLetterState[index]"
+  <div class="h-screen">
+    <ConfettiBackground
+      v-if="gameWon"
+      class="absolute h-screen w-full top-0 left-0 -z-50 m-auto"
+    />
+    <EndOfGameModal
+      :class="{ hidden: gameOverModalClosed }"
+      :games-played="1"
+      :games-won="1"
+      :streak="1"
+      :max-streak="1"
+      :guess-distribution="guessDistribution"
+      @close="handleToggleEndGameModal('closed')"
+      @share="handleShareButtonClick"
+    />
+    <SiteHeader @openSettings="handleToggleSettings('open')" />
+    <SettingsModal
+      :class="{ hidden: settingsClosed }"
+      @close="handleToggleSettings('closed')"
+    />
+    <div
+      class="md:max-w-md lg:max-w-lg mx-auto py-3 flex flex-col h-stretch justify-around"
+    >
+      <div class="flex flex-col gap-y-2 pb-3">
+        <GridRow
+          v-for="(element, index) in gridRowContents"
+          :class="shortWideScreen ? 'max-w-xs' : 'max-w-md'"
+          :key="index"
+          :locked="index < activeRow ? true : false"
+          :guess="index === activeRow ? currentRowGuess : element"
+          :id="`row-${index}`"
+          :letter-state-array="guessWordLetterState[index]"
+        />
+      </div>
+      <KeyBoard
+        @letter-press="handleLetterPress"
+        :correct-letters="getCorrectLetterArray"
+        :wrong-guess-letters="getwrongGuessLetterArray"
+        :wrong-position-letters="getwrongPositionLetterArray"
       />
     </div>
-    <KeyBoard
-      @letter-press="handleLetterPress"
-      :correct-letters="getCorrectLetterArray"
-      :wrong-guess-letters="getwrongGuessLetterArray"
-      :wrong-position-letters="getwrongPositionLetterArray"
-    />
   </div>
 </template>
 
@@ -197,5 +201,9 @@ onMounted(() => {
 div[data-testid='toast-content'] {
   font-weight: bold;
   font-size: large;
+}
+
+.h-stretch {
+  height: calc(100% - 80px);
 }
 </style>
