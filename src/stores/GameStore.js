@@ -1,6 +1,9 @@
 import { defineStore } from 'pinia';
-import { randomlySelectedWordOfTheDay } from '../utils/UtilFunctions.js';
-import { searchForAcceptableGuess } from '../utils/UtilFunctions';
+import {
+  randomlySelectedWordOfTheDay,
+  searchForAcceptableGuess,
+  guessWordLetterPlacement
+} from '../utils/UtilFunctions.js';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
@@ -16,7 +19,8 @@ export const useGameStore = defineStore('Game Store', {
       currentGuessWord: '',
       correctLetters: [],
       wrongPositionLetters: [],
-      wrongGuessLetters: []
+      wrongGuessLetters: [],
+      guessWordsLetterPlacementArray: []
     };
   },
   getters: {
@@ -58,6 +62,9 @@ export const useGameStore = defineStore('Game Store', {
     },
     getGameEnded(state) {
       return state.gameEnded;
+    },
+    getGuessWordsLetterPlacementArray(state) {
+      return state.guessWordsLetterPlacementArray;
     }
   },
   actions: {
@@ -107,18 +114,7 @@ export const useGameStore = defineStore('Game Store', {
         return;
       } else {
         // Otherwise, a full word guess that isn't correct
-        const incorrectWordArray = this.currentGuessWord.split('');
-        incorrectWordArray.forEach((letter, index) => {
-          if (this.wordOfTheDay.includes(letter)) {
-            if (this.wordOfTheDay[index] === letter) {
-              this.addCorrectLetter(letter);
-            } else {
-              this.addWrongPositionLetter(letter);
-            }
-          } else {
-            this.addWrongGuessLetter(letter);
-          }
-        });
+        this.addGuessWordLetterPlacement();
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
         this.currentGuessWord = '';
         return false;
@@ -166,6 +162,22 @@ export const useGameStore = defineStore('Game Store', {
     },
     validateGuessWord() {
       return searchForAcceptableGuess(this.currentGuessWord);
+    },
+    addGuessWordLetterPlacement() {
+      const newGuessLetterPlacement = guessWordLetterPlacement(
+        this.currentGuessWord.toLocaleLowerCase(),
+        this.wordOfTheDay
+      );
+      this.guessWordsLetterPlacementArray.push(newGuessLetterPlacement);
+      newGuessLetterPlacement.forEach((letterPlacement, index) => {
+        if (letterPlacement === 'correctPosition') {
+          this.addCorrectLetter(this.currentGuessWord[index]);
+        } else if (letterPlacement === 'wrongPosition') {
+          this.addWrongPositionLetter(this.currentGuessWord[index]);
+        } else {
+          this.addWrongGuessLetter(this.currentGuessWord[index]);
+        }
+      });
     }
   }
 });

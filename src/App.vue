@@ -27,6 +27,7 @@
         :locked="index < activeRow ? true : false"
         :guess="index === activeRow ? currentRowGuess : element"
         :id="`row-${index}`"
+        :letter-state-array="guessWordLetterState[index]"
       />
     </div>
     <KeyBoard
@@ -73,6 +74,7 @@ const guessDistribution = computed(() => {
     return [0, 0, 0, 0, 0, 0];
   }
 });
+const guessWordLetterState = computed(() => gameStore.getGuessWordsLetterPlacementArray);
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);

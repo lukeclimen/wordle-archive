@@ -56,3 +56,47 @@ export const randomlySelectedWordOfTheDay = () => {
   const randomIndex = Math.floor(Math.random() * maxIndex);
   return wordOfTheDayList[randomIndex];
 };
+
+/**
+ * Determines the correct label for each letter in a guess
+ *
+ * Given a guess word and the word of the day, returns an array
+ * containing 'correctPosition', 'wrongPosition', or 'notInWord'
+ * for each letter in the guess word.
+ *
+ * @param {String} guessWord [Guess word]
+ * @param {String} wordOfTheDay [Word of the day]
+ * @returns {String[]} [Array of letter guess results]
+ */
+export const guessWordLetterPlacement = (guessWord, wordOfTheDay) => {
+  // This function iterates through each array once, so it has O(n) time efficiency
+  const alphabetMap = new Map();
+  const guessLetterPlacementArray = [];
+
+  // Iterate through WOTD, assigning correctPosition and storing remainders in map
+  wordOfTheDay.split('').forEach((letter, index) => {
+    if (letter === guessWord[index]) {
+      guessLetterPlacementArray[index] = 'correctPosition';
+    } else {
+      if (alphabetMap.has(letter)) {
+        alphabetMap.set(letter, alphabetMap.get(letter) + 1);
+      } else {
+        alphabetMap.set(letter, 1);
+      }
+    }
+  });
+
+  // Iterate through guess, assigning wrongPosition if in map, notInWord otherwise
+  guessWord.split('').forEach((letter, index) => {
+    if (guessLetterPlacementArray[index] === 'correctPosition') {
+      return;
+    }
+    if (alphabetMap.has(letter) && alphabetMap.get(letter) > 0) {
+      guessLetterPlacementArray[index] = 'wrongPosition';
+      alphabetMap.set(letter, alphabetMap.get(letter) - 1);
+    } else {
+      guessLetterPlacementArray[index] = 'notInWord';
+    }
+  });
+  return guessLetterPlacementArray;
+};
