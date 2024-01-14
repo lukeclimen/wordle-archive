@@ -12,7 +12,6 @@
 <script setup>
 import { computed } from 'vue';
 import LetterTile from './LetterTile.vue';
-import { useGameStore } from '../stores/GameStore';
 
 const props = defineProps({
   guess: {
@@ -32,8 +31,6 @@ const props = defineProps({
   }
 });
 
-const gameStore = useGameStore();
-
 const lettersInGuess = computed(() => {
   let letterArray = props.guess;
   if (props.guess.length === 5) {
@@ -48,23 +45,6 @@ const lettersInGuess = computed(() => {
   }
   return letterArray;
 });
-
-// const letterStateArray = computed(() => {
-//   const letterStateArray = [];
-//   const guessLetterArray = props.guess.split('');
-//   guessLetterArray.forEach((letter, index) => {
-//     if (gameStore.wordOfTheDay.includes(letter)) {
-//       if (gameStore.wordOfTheDay[index] === letter) {
-//         letterStateArray.push('correctPosition');
-//       } else {
-//         letterStateArray.push('wrongPosition');
-//       }
-//     } else {
-//       letterStateArray.push('notInWord');
-//     }
-//   });
-//   return letterStateArray;
-// });
 </script>
 
 <style scoped>
