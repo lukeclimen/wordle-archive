@@ -1,5 +1,5 @@
 <template>
-  <div class="h-screen">
+  <div class="h-screen overflow-hidden">
     <ConfettiBackground
       v-if="gameWon"
       class="absolute h-screen w-full top-0 left-0 -z-50 m-auto"
