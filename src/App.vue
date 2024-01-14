@@ -85,15 +85,17 @@ const gameOverModalClosed = ref(true);
 const gameWon = ref(false);
 
 watch(gameOver, () => {
-  if (gameStore.getLostGame) {
-    toastNotification(gameStore.wordOfTheDay.toLocaleUpperCase(), 'error');
-  } else {
-    gameWon.value = true;
-    toastNotification('Congratulations!', 'success');
-  }
+  setTimeout(() => {
+    if (gameStore.getLostGame) {
+      toastNotification(gameStore.wordOfTheDay.toLocaleUpperCase(), 'error');
+    } else {
+      gameWon.value = true;
+      toastNotification('Congratulations!', 'success');
+    }
+  }, 2500);
   setTimeout(() => {
     handleToggleEndGameModal('open)');
-  }, 3000);
+  }, 4000);
 });
 
 const handleLetterPress = (content) => {
