@@ -105,6 +105,7 @@ export const useGameStore = defineStore('Game Store', {
           this.addCorrectLetter(letter);
           this.removeWrongPositionLetter(letter);
         });
+        this.addGuessWordLetterPlacement();
         this.addGuessWord(this.currentGuessWord.toLocaleLowerCase());
         // This sets the game as over (and lost is false)
         this.setGameEnded();
