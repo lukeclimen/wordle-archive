@@ -77,8 +77,8 @@ describe('Random Word of the Day Function', () => {
 
 describe('Guess-word Letter Placement Function', () => {
   it('Correctly handles multiples of the same letter in the guess', () => {
-    const testWordsOfTheDay = ['there', 'there', 'fluff'];
-    const testGuessWords = ['weary', 'cheer', 'proof'];
+    const testGuessWords = ['there', 'there', 'fluff'];
+    const testWordsOfTheDay = ['weary', 'cheer', 'proof'];
     const expectedResultArrays = [
       // Comparing 'there' to 'weary'
       ['notInWord', 'notInWord', 'wrongPosition', 'correctPosition', 'notInWord'],
@@ -91,7 +91,7 @@ describe('Guess-word Letter Placement Function', () => {
         'wrongPosition'
       ],
       // Comparing 'fluff' to 'proof'
-      ['noInWord', 'notInWord', 'notInWord', 'notInWord', 'correctPosition']
+      ['notInWord', 'notInWord', 'notInWord', 'notInWord', 'correctPosition']
     ];
 
     testWordsOfTheDay.forEach((_, index) => {
@@ -99,7 +99,7 @@ describe('Guess-word Letter Placement Function', () => {
         testGuessWords[index],
         testWordsOfTheDay[index]
       );
-      expect(result).toBe(expectedResultArrays[index]);
+      expect(result).toStrictEqual(expectedResultArrays[index]);
     });
   });
 });
