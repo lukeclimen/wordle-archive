@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-hidden" :style="{ height: properWindowHeight + 'px' }">
+  <div class="h-screen overflow-hidden">
     <ConfettiBackground
       v-if="gameWon"
       class="absolute h-screen w-full top-0 left-0 -z-50 m-auto"
@@ -83,7 +83,6 @@ const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
 const gameWon = ref(false);
-const properWindowHeight = ref(window.innerHeight);
 
 watch(gameOver, () => {
   setTimeout(() => {
