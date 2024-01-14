@@ -24,6 +24,11 @@ const props = defineProps({
     type: Boolean,
     required: false,
     default: false
+  },
+  letterStateArray: {
+    type: Array,
+    required: false,
+    default: () => ['', '', '', '', '']
   }
 });
 
@@ -44,22 +49,22 @@ const lettersInGuess = computed(() => {
   return letterArray;
 });
 
-const letterStateArray = computed(() => {
-  const letterStateArray = [];
-  const guessLetterArray = props.guess.split('');
-  guessLetterArray.forEach((letter, index) => {
-    if (gameStore.wordOfTheDay.includes(letter)) {
-      if (gameStore.wordOfTheDay[index] === letter) {
-        letterStateArray.push('correctPosition');
-      } else {
-        letterStateArray.push('wrongPosition');
-      }
-    } else {
-      letterStateArray.push('notInWord');
-    }
-  });
-  return letterStateArray;
-});
+// const letterStateArray = computed(() => {
+//   const letterStateArray = [];
+//   const guessLetterArray = props.guess.split('');
+//   guessLetterArray.forEach((letter, index) => {
+//     if (gameStore.wordOfTheDay.includes(letter)) {
+//       if (gameStore.wordOfTheDay[index] === letter) {
+//         letterStateArray.push('correctPosition');
+//       } else {
+//         letterStateArray.push('wrongPosition');
+//       }
+//     } else {
+//       letterStateArray.push('notInWord');
+//     }
+//   });
+//   return letterStateArray;
+// });
 </script>
 
 <style scoped>
