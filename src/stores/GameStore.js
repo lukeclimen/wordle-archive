@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia';
-import { randomlySelectedWordOfTheDay } from '../utils/UtilFunctions.js';
-import { searchForAcceptableGuess } from '../utils/UtilFunctions';
+import {
+  randomlySelectedWordOfTheDay,
+  searchForAcceptableGuess
+} from '../utils/UtilFunctions.js';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
