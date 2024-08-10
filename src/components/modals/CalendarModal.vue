@@ -1,5 +1,5 @@
 <template>
-  <GenericModal modalTitle="Calendar" @close="$emit('close')">
+  <GenericModal modalTitle="Calendar" @close="$emit('close')" :collapse="true">
     <DatePicker v-model="date" mode="date" />
   </GenericModal>
 </template>
