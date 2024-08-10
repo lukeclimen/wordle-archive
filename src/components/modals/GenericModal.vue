@@ -18,6 +18,7 @@
 
 <script setup>
 import { XMarkIcon } from '@heroicons/vue/24/solid';
+
 defineProps({
   modalTitle: {
     type: String,
@@ -29,6 +30,7 @@ defineProps({
     default: false
   }
 });
+
 defineEmits(['close']);
 </script>
 
