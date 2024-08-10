@@ -1,7 +1,11 @@
 <template>
-  <g class="flex flex-row" :class="{ minify: isMobile }">
+  <g class="flex flex-row">
     <g id="letterA">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.04 562.83">
           <g fill="#06b8f9">
             <path
@@ -15,7 +19,11 @@
       </svg>
     </g>
     <g id="letterR" transform="translate(39.75, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 263.33 266.89">
           <g fill="#a966fd">
             <path
@@ -29,7 +37,11 @@
       </svg>
     </g>
     <g id="letterC" transform="translate(79.2, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.89 266.89">
           <path
             d="M200.52 0H66.37A66.36 66.36 0 0 0 0 66.37V88a134.39 134.39 0 0 1 226.21 15l1.21 2.2-54.74 29.8-1.2-2.18a72.06 72.06 0 1 0-1.1 71.27l1.29-2.2 53 32.84-1.28 2.12a135 135 0 0 1-24.71 30h1.8a66.36 66.36 0 0 0 66.37-66.37V66.37A66.36 66.36 0 0 0 200.52 0z"
@@ -39,7 +51,11 @@
       </svg>
     </g>
     <g id="letterH" transform="translate(119.2, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260.68 266.89">
           <g fill="#fe5508">
             <path d="M129.43 197.33H49.31V266a66.84 66.84 0 0 0 10.85.89h69.27z"></path>
@@ -51,7 +67,11 @@
       </svg>
     </g>
     <g id="letterI" transform="translate(158.25, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.89 266.89">
           <g fill="#0ab584">
             <path
@@ -65,7 +85,11 @@
       </svg>
     </g>
     <g id="letterV" transform="translate(198.25, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.89 266.89">
           <path
             d="M0 194.55v6a66.17 66.17 0 0 0 18.59 46zM200.52 0H66.37a66.39 66.39 0 0 0-62.6 44.31h2.65l61.65 159.87 59.66-159.87h58.94L107 266.89h93.56a66.36 66.36 0 0 0 66.37-66.37V66.37A66.36 66.36 0 0 0 200.52 0z"
@@ -75,7 +99,11 @@
       </svg>
     </g>
     <g id="letterL" transform="translate(238.25, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 254.6 266.89">
           <path
             d="M188.23 0H54.07A66.26 66.26 0 0 0 0 27.91h45.14v184.27h125.78v54.71h17.31a66.37 66.37 0 0 0 66.37-66.37V66.37A66.38 66.38 0 0 0 188.23 0z"
@@ -85,7 +113,11 @@
       </svg>
     </g>
     <g id="letterE" transform="translate(276.5, 0)">
-      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+      <svg
+        :width="letterSize"
+        :height="letterSize"
+        style="border-style: none; border-radius: 0.75rem"
+      >
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260.12 266.89">
           <path
             d="M193.75 0H59.6A66.37 66.37 0 0 0 0 37.15h164.64v50.38H33.46v51.54h121.78v55.21H33.46v42.19h136v30.42h24.32a66.36 66.36 0 0 0 66.37-66.37V66.37A66.37 66.37 0 0 0 193.75 0z"
@@ -97,12 +129,14 @@
   </g>
 </template>
 <script setup>
-defineProps({
+import { computed } from 'vue';
+const props = defineProps({
   isMobile: {
     type: Boolean,
     default: true
   }
 });
+const letterSize = computed(() => (props.isMobile ? 30 : 40));
 </script>
 <style scoped>
 @keyframes appear {
