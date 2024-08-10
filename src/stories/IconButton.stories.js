@@ -1,4 +1,6 @@
 import IconButton from '../components/IconButton.vue';
+import { Cog6ToothIcon } from '@heroicons/vue/24/solid';
+import { CalendarDaysIcon } from '@heroicons/vue/24/outline';
 
 export default {
   title: 'Components/IconButton',
@@ -16,8 +18,12 @@ const Template = (args) => ({
     </div>`
 });
 
-export const Primary = Template.bind({});
-Primary.args = {};
+export const SettingsButton = Template.bind({});
+SettingsButton.args = {
+  icon: Cog6ToothIcon
+};
 
-export const Secondary = Template.bind({});
-Secondary.args = {};
+export const CalendarButton = Template.bind({});
+CalendarButton.args = {
+  icon: CalendarDaysIcon
+};
