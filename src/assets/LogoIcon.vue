@@ -1,5 +1,5 @@
 <template>
-  <g class="flex flex-row">
+  <g class="flex flex-row" :class="{ minify: isMobile }">
     <g id="letterA">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.04 562.83">
@@ -96,6 +96,14 @@
     </g>
   </g>
 </template>
+<script setup>
+defineProps({
+  isMobile: {
+    type: Boolean,
+    default: true
+  }
+});
+</script>
 <style scoped>
 @keyframes appear {
   0% {
@@ -103,6 +111,21 @@
   }
   100% {
     opacity: 1;
+  }
+}
+
+@keyframes appearDisappear {
+  0% {
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  99% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }
 
@@ -116,6 +139,18 @@
 #letterE {
   animation-name: appear;
   animation-duration: 0.2s;
+  animation-fill-mode: backwards;
+}
+
+.minify > #letterR,
+.minify > #letterC,
+.minify > #letterH,
+.minify > #letterI,
+.minify > #letterV,
+.minify > #letterL,
+.minify > #letterE {
+  opacity: 0;
+  animation-name: appearDisappear;
   animation-fill-mode: backwards;
 }
 
@@ -142,5 +177,27 @@
 }
 #letterE {
   animation-delay: 1.4s;
+}
+
+.minify > #letterR {
+  animation-duration: 5s;
+}
+.minify > #letterC {
+  animation-duration: 4.8s;
+}
+.minify > #letterH {
+  animation-duration: 4.6s;
+}
+.minify > #letterI {
+  animation-duration: 4.4s;
+}
+.minify > #letterV {
+  animation-duration: 4.2s;
+}
+.minify > #letterL {
+  animation-duration: 4s;
+}
+.minify > #letterE {
+  animation-duration: 3.8s;
 }
 </style>

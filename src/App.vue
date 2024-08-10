@@ -14,7 +14,7 @@
       @close="handleToggleEndGameModal('closed')"
       @share="handleShareButtonClick"
     />
-    <SiteHeader @openSettings="handleToggleSettings('open')" />
+    <SiteHeader @openSettings="handleToggleSettings('open')" :isMobile="mobileScreen" />
     <SettingsModal
       :class="{ hidden: settingsClosed }"
       @close="handleToggleSettings('closed')"
@@ -83,6 +83,7 @@ const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
 const gameOverModalClosed = ref(true);
 const gameWon = ref(false);
+const mobileScreen = ref(true);
 
 watch(gameOver, () => {
   setTimeout(() => {
@@ -180,6 +181,7 @@ onMounted(() => {
   if (screenWidth < 700 && screenHeight < 2 * screenWidth) {
     shortWideScreen.value = true;
   }
+  mobileScreen.value = screenWidth < 550;
 });
 </script>
 
