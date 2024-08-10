@@ -1,18 +1,36 @@
 <template>
   <GenericModal modalTitle="Calendar" @close="$emit('close')" :collapse="true">
-    <DatePicker v-model="date" mode="date" />
+    <DatePicker v-model="date" mode="date" :disabled-dates="disabledDates" />
   </GenericModal>
 </template>
 
 <script setup>
-import GenericModal from './GenericModal.vue';
+import { computed, ref, watch } from 'vue';
 import { DatePicker } from 'v-calendar';
 import 'v-calendar/style.css';
-import { ref, watch } from 'vue';
+import GenericModal from './GenericModal.vue';
 
 defineEmits(['close']);
+const todayDate = new Date();
+const date = ref(todayDate);
+const disabledDates = computed(() => {
+  const firstWordleDate = new Date('2021-06-19');
+  const tomorrowDate = new Date(
+    todayDate.getFullYear(),
+    todayDate.getMonth(),
+    todayDate.getDate() + 1
+  );
+  const dateRange = [
+    {
+      end: firstWordleDate
+    },
+    {
+      start: tomorrowDate
+    }
+  ];
+  return dateRange;
+});
 
-const date = ref(new Date());
 watch(date, async () => {
   console.log(date.value);
 });
