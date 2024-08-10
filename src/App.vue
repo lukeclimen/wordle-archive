@@ -14,7 +14,11 @@
       @close="handleToggleEndGameModal('closed')"
       @share="handleShareButtonClick"
     />
-    <SiteHeader @openSettings="handleToggleSettings('open')" :isMobile="mobileScreen" />
+    <SiteHeader
+      @openSettings="handleToggleSettings('open')"
+      :isMobile="mobileScreen"
+      @openCalendar="handleToggleCalendar('open')"
+    />
     <SettingsModal
       :class="{ hidden: settingsClosed }"
       @close="handleToggleSettings('closed')"
@@ -52,8 +56,8 @@ import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
-import SettingsModal from './components/SettingsModal.vue';
-import EndOfGameModal from './components/EndOfGameModal.vue';
+import SettingsModal from './components/modals/SettingsModal.vue';
+import EndOfGameModal from './components/modals/EndOfGameModal.vue';
 import ConfettiBackground from './components/ConfettiBackground.vue';
 
 const gameStore = useGameStore();
@@ -81,6 +85,7 @@ const guessDistribution = computed(() => {
 const guessWordLetterState = computed(() => gameStore.getGuessWordsLetterPlacementArray);
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
+const calendarClosed = ref(true);
 const gameOverModalClosed = ref(true);
 const gameWon = ref(false);
 const mobileScreen = ref(true);
@@ -121,6 +126,10 @@ const handleLetterPress = (content) => {
 
 const handleToggleSettings = (modalStatus) => {
   settingsClosed.value = modalStatus === 'closed' ? true : false;
+};
+
+const handleToggleCalendar = (modalStatus) => {
+  calendarClosed.value = modalStatus === 'closed' ? true : false;
 };
 
 const handleToggleEndGameModal = (modalStatus) => {
