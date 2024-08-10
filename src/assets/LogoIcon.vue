@@ -1,18 +1,20 @@
 <template>
   <g class="flex flex-row">
-    <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.04 562.83">
-        <g fill="#06b8f9">
-          <path
-            d="M119.95 347.38h138.78l-68.7-159.95-70.08 159.95zm174.17 104.87H83l-.24.56-2.48 5.7c-2.1 4.87-5 11.69-8.43 19.55-6.75 15.72-15.2 35.55-22 52-4.53 11-8.32 20.46-10.36 26.17l-.28.77a66.05 66.05 0 0 0 27.16 5.81h271.06z"
-          ></path>
-          <path
-            d="M492.67 0H66.37A66.36 66.36 0 0 0 0 66.37v286.05C54.44 221.47 129.23 64 129.24 63.94l.67-1.43h117.8l210 500.32h34.92A66.36 66.36 0 0 0 559 496.46V66.37A66.36 66.36 0 0 0 492.67 0z"
-          ></path>
-        </g>
+    <g id="letterA">
+      <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 559.04 562.83">
+          <g fill="#06b8f9">
+            <path
+              d="M119.95 347.38h138.78l-68.7-159.95-70.08 159.95zm174.17 104.87H83l-.24.56-2.48 5.7c-2.1 4.87-5 11.69-8.43 19.55-6.75 15.72-15.2 35.55-22 52-4.53 11-8.32 20.46-10.36 26.17l-.28.77a66.05 66.05 0 0 0 27.16 5.81h271.06z"
+            ></path>
+            <path
+              d="M492.67 0H66.37A66.36 66.36 0 0 0 0 66.37v286.05C54.44 221.47 129.23 64 129.24 63.94l.67-1.43h117.8l210 500.32h34.92A66.36 66.36 0 0 0 559 496.46V66.37A66.36 66.36 0 0 0 492.67 0z"
+            ></path>
+          </g>
+        </svg>
       </svg>
-    </svg>
-    <g transform="translate(39.75, 0)">
+    </g>
+    <g id="letterR" transform="translate(39.75, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 263.33 266.89">
           <g fill="#a966fd">
@@ -26,7 +28,7 @@
         </svg>
       </svg>
     </g>
-    <g transform="translate(79.2, 0)">
+    <g id="letterC" transform="translate(79.2, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.89 266.89">
           <path
@@ -36,7 +38,7 @@
         </svg>
       </svg>
     </g>
-    <g transform="translate(119.2, 0)">
+    <g id="letterH" transform="translate(119.2, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260.68 266.89">
           <g fill="#fe5508">
@@ -48,7 +50,7 @@
         </svg>
       </svg>
     </g>
-    <g transform="translate(158.25, 0)">
+    <g id="letterI" transform="translate(158.25, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.89 266.89">
           <g fill="#0ab584">
@@ -62,7 +64,7 @@
         </svg>
       </svg>
     </g>
-    <g transform="translate(198.25, 0)">
+    <g id="letterV" transform="translate(198.25, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 266.89 266.89">
           <path
@@ -72,7 +74,7 @@
         </svg>
       </svg>
     </g>
-    <g transform="translate(238.25, 0)">
+    <g id="letterL" transform="translate(238.25, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 254.6 266.89">
           <path
@@ -82,7 +84,7 @@
         </svg>
       </svg>
     </g>
-    <g transform="translate(276.5, 0)">
+    <g id="letterE" transform="translate(276.5, 0)">
       <svg width="40" height="40" style="border-style: none; border-radius: 0.75rem">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260.12 266.89">
           <path
@@ -94,3 +96,51 @@
     </g>
   </g>
 </template>
+<style scoped>
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+#letterA,
+#letterR,
+#letterC,
+#letterH,
+#letterI,
+#letterV,
+#letterL,
+#letterE {
+  animation-name: appear;
+  animation-duration: 0.2s;
+  animation-fill-mode: backwards;
+}
+
+#letterA {
+  animation-delay: 0s;
+}
+#letterR {
+  animation-delay: 0.2s;
+}
+#letterC {
+  animation-delay: 0.4s;
+}
+#letterH {
+  animation-delay: 0.6s;
+}
+#letterI {
+  animation-delay: 0.8s;
+}
+#letterV {
+  animation-delay: 1s;
+}
+#letterL {
+  animation-delay: 1.2s;
+}
+#letterE {
+  animation-delay: 1.4s;
+}
+</style>
