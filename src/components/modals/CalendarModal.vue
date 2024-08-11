@@ -15,11 +15,7 @@ const todayDate = new Date();
 const date = ref(todayDate);
 const disabledDates = computed(() => {
   const firstWordleDate = new Date('2021-06-19');
-  const tomorrowDate = new Date(
-    todayDate.getFullYear(),
-    todayDate.getMonth(),
-    todayDate.getDate() + 1
-  );
+  const tomorrowDate = new Date().setDate(todayDate.getDate() + 1);
   const dateRange = [
     {
       end: firstWordleDate
