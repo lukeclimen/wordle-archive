@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import {
-  randomlySelectedWordOfTheDay,
   searchForAcceptableGuess,
   guessWordLetterPlacement
 } from '../utils/UtilFunctions.js';
+import axios from 'axios';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
@@ -68,10 +68,28 @@ export const useGameStore = defineStore('Game Store', {
     }
   },
   actions: {
-    fetchWordOfTheDay() {
+    async fetchWordOfTheDay(date) {
       // TODO: Add fetch request once an endpoint is created
       // Currently only mocking the request and using "CLICK"
-      this.wordOfTheDay = randomlySelectedWordOfTheDay();
+      const wordOfTheDayUrl = import.meta.env['VITE_BACKEND_ENDPOINT'] + '/get-wordle';
+      await axios
+        .get(wordOfTheDayUrl, { params: { selected_date: date } })
+        .then((response) => {
+          if (response.status === 200) {
+            if (response.data['selected_date'] === date) {
+              this.wordOfTheDay = response.data['word'];
+            } else {
+              // TODO: Handle local time zone vs UTC miscommunications
+              console.log(
+                `Returned date: ${response.data['selected_date']}, Attempted date: ${date}`
+              );
+            }
+          } else if (response.status === 204) {
+            // TODO: Handle local time zone vs UTC miscommunications
+            console.log("Need to retry with previous day's word of the day");
+          }
+        })
+        .catch((error) => console.log(error));
     },
     setLoading() {
       this.isLoading = true;

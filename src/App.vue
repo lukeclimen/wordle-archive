@@ -189,8 +189,8 @@ const toastNotification = (message, type) => {
   }
 };
 
-onMounted(() => {
-  gameStore.fetchWordOfTheDay();
+onMounted(async () => {
+  await gameStore.fetchWordOfTheDay(new Date().toISOString().split('T')[0]);
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
