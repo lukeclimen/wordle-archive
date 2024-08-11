@@ -21,7 +21,7 @@
     />
     <SettingsModal v-if="!settingsClosed" @close="handleToggleSettings('closed')" />
     <CalendarModal
-      v-if="!calendarClosed"
+      :class="{ hidden: calendarClosed }"
       @close="handleToggleCalendar('closed')"
       @dateSelected="handleDateSelected"
     />
