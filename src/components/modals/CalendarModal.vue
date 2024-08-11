@@ -36,4 +36,8 @@ watch(date, async () => {
 });
 </script>
 
-<style scoped></style>
+<style>
+.vc-bordered {
+  border: none;
+}
+</style>
