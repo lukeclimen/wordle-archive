@@ -34,4 +34,8 @@ defineProps({
 defineEmits(['close']);
 </script>
 
-<style scoped></style>
+<style scoped>
+.smoke {
+  background-color: rgba(128, 128, 128, 0.7);
+}
+</style>

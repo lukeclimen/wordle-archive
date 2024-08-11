@@ -35,8 +35,4 @@ import GenericModal from './GenericModal.vue';
 defineEmits(['close']);
 </script>
 
-<style scoped>
-.smoke {
-  background-color: rgba(128, 128, 128, 0.7);
-}
-</style>
+<style scoped></style>
