@@ -19,9 +19,11 @@
       :isMobile="mobileScreen"
       @openCalendar="handleToggleCalendar('open')"
     />
-    <SettingsModal
-      :class="{ hidden: settingsClosed }"
-      @close="handleToggleSettings('closed')"
+    <SettingsModal v-if="!settingsClosed" @close="handleToggleSettings('closed')" />
+    <CalendarModal
+      v-if="!calendarClosed"
+      @close="handleToggleCalendar('closed')"
+      @dateSelected="handleDateSelected"
     />
     <div
       class="md:max-w-md lg:max-w-lg mx-auto py-3 flex flex-col h-stretch justify-around"
@@ -58,6 +60,7 @@ import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
 import SettingsModal from './components/modals/SettingsModal.vue';
 import EndOfGameModal from './components/modals/EndOfGameModal.vue';
+import CalendarModal from './components/modals/CalendarModal.vue';
 import ConfettiBackground from './components/ConfettiBackground.vue';
 
 const gameStore = useGameStore();
@@ -142,6 +145,10 @@ const handleShareButtonClick = async () => {
     gameStore.getGuessCount,
     gameStore.getGuessList
   );
+};
+
+const handleDateSelected = (date) => {
+  console.log(date);
 };
 
 const toastNotification = (message, type) => {
