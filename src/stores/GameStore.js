@@ -69,8 +69,7 @@ export const useGameStore = defineStore('Game Store', {
   },
   actions: {
     async fetchWordOfTheDay(date) {
-      // TODO: Add fetch request once an endpoint is created
-      // Currently only mocking the request and using "CLICK"
+      this.resetGame();
       const wordOfTheDayUrl = import.meta.env['VITE_BACKEND_ENDPOINT'] + '/get-wordle';
       await axios
         .get(wordOfTheDayUrl, { params: { selected_date: date } })
@@ -197,6 +196,21 @@ export const useGameStore = defineStore('Game Store', {
           this.addWrongGuessLetter(this.currentGuessWord[index]);
         }
       });
+    },
+    resetGame() {
+      this.wordOfTheDay = '';
+      this.gameEnded = false;
+      this.gameLost = false;
+      this.isLoading = false;
+      this.isErrored = false;
+      this.errorMessage = null;
+      this.guessList = ['', '', '', '', '', ''];
+      this.amountOfGuesses = 0;
+      this.currentGuessWord = '';
+      this.correctLetters = [];
+      this.wrongPositionLetters = [];
+      this.wrongGuessLetters = [];
+      this.guessWordsLetterPlacementArray = [];
     }
   }
 });
