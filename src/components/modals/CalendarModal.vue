@@ -10,7 +10,7 @@ import { DatePicker } from 'v-calendar';
 import 'v-calendar/style.css';
 import GenericModal from './GenericModal.vue';
 
-defineEmits(['close']);
+const emit = defineEmits(['close', 'dateSelected']);
 const todayDate = new Date();
 const date = ref(todayDate);
 const disabledDates = computed(() => {
@@ -32,7 +32,7 @@ const disabledDates = computed(() => {
 });
 
 watch(date, async () => {
-  console.log(date.value);
+  emit('dateSelected', date.value);
 });
 </script>
 
