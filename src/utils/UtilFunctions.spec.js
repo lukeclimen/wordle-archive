@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import {
   searchForAcceptableGuess,
   randomlySelectedWordOfTheDay,
-  guessWordLetterPlacement
+  guessWordLetterPlacement,
+  formatDateForApi
 } from './UtilFunctions';
 
 describe('Guess Array Search function', () => {
@@ -100,6 +101,25 @@ describe('Guess-word Letter Placement Function', () => {
         testWordsOfTheDay[index]
       );
       expect(result).toStrictEqual(expectedResultArrays[index]);
+    });
+  });
+});
+
+describe('Date formatter for API requests', () => {
+  it('Correctly formats a Date object into a String of format YYYY-MM-DD', () => {
+    const testDates = [
+      new Date(2012, 8, 15),
+      new Date(1970, 0, 10),
+      new Date(2020, 5, 1),
+      new Date(2134, 11, 31)
+    ];
+    const expectedDateStrings = ['2012-09-15', '1970-01-10', '2020-06-01', '2134-12-31'];
+
+    testDates.forEach((_, index) => {
+      console.log(expectedDateStrings[index]);
+      const result = formatDateForApi(testDates[index]);
+      console.log(result);
+      expect(result).toStrictEqual(expectedDateStrings[index]);
     });
   });
 });
