@@ -52,7 +52,7 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
-import { generateGameCopy } from './utils/UtilFunctions';
+import { generateGameCopy, formatDateForApi } from './utils/UtilFunctions';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
@@ -147,8 +147,10 @@ const handleShareButtonClick = async () => {
   );
 };
 
-const handleDateSelected = (date) => {
-  console.log(date);
+const handleDateSelected = async (date) => {
+  const formattedDate = formatDateForApi(date);
+  await gameStore.fetchWordOfTheDay(formattedDate);
+  handleToggleCalendar('closed');
 };
 
 const toastNotification = (message, type) => {
