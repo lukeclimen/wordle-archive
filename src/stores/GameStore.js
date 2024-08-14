@@ -92,7 +92,11 @@ export const useGameStore = defineStore('Game Store', {
             this.fetchWordOfTheDay(formattedPreviousDay);
           }
         })
-        .catch((error) => console.log(error));
+        .catch((error) => {
+          console.log(error);
+          this.isErrored = true;
+          this.errorMessage = "Unable to retrieve Wordle.";
+        });
     },
     setLoading() {
       this.isLoading = true;
