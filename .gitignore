@@ -7,6 +7,20 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+### yarn ###
+# https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored
+
+.yarn/*
+!.yarn/releases
+!.yarn/patches
+!.yarn/plugins
+!.yarn/sdks
+!.yarn/versions
+
+
+# and uncomment the following lines
+.pnp.*
+
 node_modules
 .DS_Store
 dist
