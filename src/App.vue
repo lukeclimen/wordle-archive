@@ -94,6 +94,7 @@ const gameWon = ref(false);
 const mobileScreen = ref(true);
 
 watch(gameOver, () => {
+  if (!gameOver.value) return;
   setTimeout(() => {
     if (gameStore.getLostGame) {
       toastNotification(gameStore.wordOfTheDay.toLocaleUpperCase(), 'error');
@@ -148,6 +149,7 @@ const handleShareButtonClick = async () => {
 };
 
 const handleDateSelected = async (date) => {
+  gameWon.value = false;
   const formattedDate = formatDateForApi(date);
   await gameStore.fetchWordOfTheDay(formattedDate);
   handleToggleCalendar('closed');
