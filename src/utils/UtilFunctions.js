@@ -100,3 +100,16 @@ export const guessWordLetterPlacement = (guessWord, wordOfTheDay) => {
   });
   return guessLetterPlacementArray;
 };
+
+/**
+ * Formats a JS Date object into a string for the API
+ *
+ * @param {Date} date
+ * @returns {String} Stringified date of format YYYY-MM-DD
+ */
+export const formatDateForApi = (date) => {
+  const dateYear = date.getFullYear();
+  const dateMonth = (date.getMonth() + 1).toString().padStart(2, '0');
+  const dateDay = date.getDate().toString().padStart(2, '0');
+  return `${dateYear}-${dateMonth}-${dateDay}`;
+};

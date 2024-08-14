@@ -14,10 +14,16 @@
       @close="handleToggleEndGameModal('closed')"
       @share="handleShareButtonClick"
     />
-    <SiteHeader @openSettings="handleToggleSettings('open')" />
-    <SettingsModal
-      :class="{ hidden: settingsClosed }"
-      @close="handleToggleSettings('closed')"
+    <SiteHeader
+      @openSettings="handleToggleSettings('open')"
+      :isMobile="mobileScreen"
+      @openCalendar="handleToggleCalendar('open')"
+    />
+    <SettingsModal v-if="!settingsClosed" @close="handleToggleSettings('closed')" />
+    <CalendarModal
+      :class="{ hidden: calendarClosed }"
+      @close="handleToggleCalendar('closed')"
+      @dateSelected="handleDateSelected"
     />
     <div
       class="md:max-w-md lg:max-w-lg mx-auto py-3 flex flex-col h-stretch justify-around"
@@ -46,14 +52,15 @@
 <script setup>
 import { computed, onMounted, ref, watch } from 'vue';
 import { useGameStore } from './stores/GameStore';
-import { generateGameCopy } from './utils/UtilFunctions';
+import { generateGameCopy, formatDateForApi } from './utils/UtilFunctions';
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import GridRow from './components/GridRow.vue';
 import KeyBoard from './components/KeyBoard.vue';
 import SiteHeader from './components/SiteHeader.vue';
-import SettingsModal from './components/SettingsModal.vue';
-import EndOfGameModal from './components/EndOfGameModal.vue';
+import SettingsModal from './components/modals/SettingsModal.vue';
+import EndOfGameModal from './components/modals/EndOfGameModal.vue';
+import CalendarModal from './components/modals/CalendarModal.vue';
 import ConfettiBackground from './components/ConfettiBackground.vue';
 
 const gameStore = useGameStore();
@@ -81,10 +88,13 @@ const guessDistribution = computed(() => {
 const guessWordLetterState = computed(() => gameStore.getGuessWordsLetterPlacementArray);
 const shortWideScreen = ref(false);
 const settingsClosed = ref(true);
+const calendarClosed = ref(true);
 const gameOverModalClosed = ref(true);
 const gameWon = ref(false);
+const mobileScreen = ref(true);
 
 watch(gameOver, () => {
+  if (!gameOver.value) return;
   setTimeout(() => {
     if (gameStore.getLostGame) {
       toastNotification(gameStore.wordOfTheDay.toLocaleUpperCase(), 'error');
@@ -122,6 +132,10 @@ const handleToggleSettings = (modalStatus) => {
   settingsClosed.value = modalStatus === 'closed' ? true : false;
 };
 
+const handleToggleCalendar = (modalStatus) => {
+  calendarClosed.value = modalStatus === 'closed' ? true : false;
+};
+
 const handleToggleEndGameModal = (modalStatus) => {
   gameOverModalClosed.value = modalStatus === 'closed' ? true : false;
 };
@@ -132,6 +146,13 @@ const handleShareButtonClick = async () => {
     gameStore.getGuessCount,
     gameStore.getGuessList
   );
+};
+
+const handleDateSelected = async (date) => {
+  gameWon.value = false;
+  const formattedDate = formatDateForApi(date);
+  await gameStore.fetchWordOfTheDay(formattedDate);
+  handleToggleCalendar('closed');
 };
 
 const toastNotification = (message, type) => {
@@ -172,14 +193,15 @@ const toastNotification = (message, type) => {
   }
 };
 
-onMounted(() => {
-  gameStore.fetchWordOfTheDay();
+onMounted(async () => {
+  await gameStore.fetchWordOfTheDay(new Date().toISOString().split('T')[0]);
   const screenWidth = window.innerWidth;
   const screenHeight = window.innerHeight;
 
   if (screenWidth < 700 && screenHeight < 2 * screenWidth) {
     shortWideScreen.value = true;
   }
+  mobileScreen.value = screenWidth < 550;
 });
 </script>
 

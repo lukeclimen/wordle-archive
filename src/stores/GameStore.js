@@ -1,9 +1,10 @@
 import { defineStore } from 'pinia';
 import {
-  randomlySelectedWordOfTheDay,
   searchForAcceptableGuess,
-  guessWordLetterPlacement
+  guessWordLetterPlacement,
+  formatDateForApi
 } from '../utils/UtilFunctions.js';
+import axios from 'axios';
 
 export const useGameStore = defineStore('Game Store', {
   state: () => {
@@ -68,10 +69,34 @@ export const useGameStore = defineStore('Game Store', {
     }
   },
   actions: {
-    fetchWordOfTheDay() {
-      // TODO: Add fetch request once an endpoint is created
-      // Currently only mocking the request and using "CLICK"
-      this.wordOfTheDay = randomlySelectedWordOfTheDay();
+    async fetchWordOfTheDay(date) {
+      this.resetGame();
+      let wordOfTheDayUrl = import.meta.env['VITE_BACKEND_ENDPOINT'] + '/get-wordle';
+      await axios
+        .get(wordOfTheDayUrl, { params: { selected_date: date } })
+        .then((response) => {
+          if (response.status === 200) {
+            if (response.data['selected_date'] === date) {
+              this.wordOfTheDay = response.data['word'];
+            } else {
+              // TODO: Handle local time zone vs UTC miscommunications
+              console.log(
+                `Returned date: ${response.data['selected_date']}, Attempted date: ${date}`
+              );
+            }
+          } else if (response.status === 204) {
+            // TODO: Need to handle local time zone vs UTC miscommunications
+            const newDate = new Date(date);
+            newDate.setDate(newDate.getDate() - 1);
+            const formattedPreviousDay = formatDateForApi(newDate);
+            this.fetchWordOfTheDay(formattedPreviousDay);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+          this.isErrored = true;
+          this.errorMessage = "Unable to retrieve Wordle.";
+        });
     },
     setLoading() {
       this.isLoading = true;
@@ -179,6 +204,21 @@ export const useGameStore = defineStore('Game Store', {
           this.addWrongGuessLetter(this.currentGuessWord[index]);
         }
       });
+    },
+    resetGame() {
+      this.wordOfTheDay = '';
+      this.gameEnded = false;
+      this.gameLost = false;
+      this.isLoading = false;
+      this.isErrored = false;
+      this.errorMessage = null;
+      this.guessList = ['', '', '', '', '', ''];
+      this.amountOfGuesses = 0;
+      this.currentGuessWord = '';
+      this.correctLetters = [];
+      this.wrongPositionLetters = [];
+      this.wrongGuessLetters = [];
+      this.guessWordsLetterPlacementArray = [];
     }
   }
 });
