@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia';
 import {
   searchForAcceptableGuess,
-  guessWordLetterPlacement
+  guessWordLetterPlacement,
+  formatDateForApi
 } from '../utils/UtilFunctions.js';
 import axios from 'axios';
 
@@ -84,8 +85,11 @@ export const useGameStore = defineStore('Game Store', {
               );
             }
           } else if (response.status === 204) {
-            // TODO: Handle local time zone vs UTC miscommunications
-            console.log("Need to retry with previous day's word of the day");
+            // TODO: Need to handle local time zone vs UTC miscommunications
+            const newDate = new Date(date);
+            newDate.setDate(newDate.getDate() - 1);
+            const formattedPreviousDay = formatDateForApi(newDate);
+            this.fetchWordOfTheDay(formattedPreviousDay);
           }
         })
         .catch((error) => console.log(error));
