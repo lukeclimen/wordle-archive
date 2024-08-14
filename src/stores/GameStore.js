@@ -71,8 +71,6 @@ export const useGameStore = defineStore('Game Store', {
     async fetchWordOfTheDay(date) {
       this.resetGame();
       let wordOfTheDayUrl = import.meta.env['VITE_BACKEND_ENDPOINT'] + '/get-wordle';
-      if (import.meta.env['VITE_BACKEND_FUNCTION_KEY'])
-        wordOfTheDayUrl += import.meta.env['VITE_BACKEND_FUNCTION_KEY'];
       await axios
         .get(wordOfTheDayUrl, { params: { selected_date: date } })
         .then((response) => {
