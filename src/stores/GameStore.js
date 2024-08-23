@@ -71,7 +71,7 @@ export const useGameStore = defineStore('Game Store', {
   actions: {
     async fetchWordOfTheDay(date) {
       this.resetGame();
-      let wordOfTheDayUrl = import.meta.env['VITE_BACKEND_ENDPOINT'] + '/get-wordle';
+      let wordOfTheDayUrl = 'https://archivle-h2f4b9eqcwg5hqdk.eastus-01.azurewebsites.net/get-wordle';
       await axios
         .get(wordOfTheDayUrl, { params: { selected_date: date } })
         .then((response) => {
