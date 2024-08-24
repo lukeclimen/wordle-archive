@@ -193,6 +193,16 @@ const toastNotification = (message, type) => {
   }
 };
 
+addEventListener("keydown", (keyEvent) => {
+  if (keyEvent.code.toLowerCase().startsWith("key")) {
+    handleLetterPress(keyEvent.key.toLowerCase());
+  } else if (keyEvent.code.toLocaleLowerCase()=== "enter") {
+    handleLetterPress("enter")
+  } else if (keyEvent.code.toLowerCase() === "backspace") {
+    handleLetterPress("back")
+  }
+})
+
 onMounted(async () => {
   await gameStore.fetchWordOfTheDay(new Date().toISOString().split('T')[0]);
   const screenWidth = window.innerWidth;
